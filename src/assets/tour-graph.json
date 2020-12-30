@@ -1,0 +1,17 @@
+{
+    "tile": {
+      "image": "tile-pano.jpg",
+      "paths": [
+        {
+          "title": "To Living Room",
+          "position": [0,0,-9],
+          "destination": "livingRoom",
+          "video": "tile_living-room.mp4"
+        }
+      ]
+    },
+    "livingRoom": {
+      "image": "living-room.jpg",
+      "paths": []
+    }
+}
