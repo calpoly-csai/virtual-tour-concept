@@ -126,7 +126,7 @@ export default function Path(props) {
     videoRef.current.addEventListener("loadeddata", setVidProps);
   }
   useEffect(importVideo, [props.video]);
-  useEffect(setupVideo, [videoRef.current, videoLink]);
+  useEffect(setupVideo, [videoLink]);
   useEffect(trackScroll, [progScalar]);
 
   return (

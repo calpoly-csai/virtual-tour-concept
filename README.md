@@ -9,9 +9,10 @@ This will push your browser. For the smoothest experience, use Safari.
 ## What it does:
 
 1. Explore a panoramic view with interactive elements.
-2. Active walk cycle
+2. Active walk cycle which allows users to stroll to the next location.
+3. Abstracts tour graph to a JSON file so the experience can be adapted and extended without writing more JavaScript. The app acts as a renderer.
 
-## What it doesn't do:
+## What should be added:
 
 1. Progressive Loading: everything is loaded up front which makes the Time To Interactive rather slow.
 2. Accurate depth mapping: the panoramas are mapped to a sphere. We'll likely want to create accurate cubemaps instead so there isn't distortion when looking straight up or down.
