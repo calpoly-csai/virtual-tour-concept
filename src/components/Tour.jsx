@@ -2,7 +2,7 @@
 import { Canvas } from "react-three-fiber";
 import Panorama from "./Panorama";
 import { css } from "@emotion/react";
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import TourGraph from "../assets/tour-graph.json";
 import { OrbitControls } from "@react-three/drei";
 import Path from "./Path";

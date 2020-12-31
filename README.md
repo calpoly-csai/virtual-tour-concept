@@ -2,7 +2,7 @@
 
 A 3D Tour renderer proof of concept based off of the [Cal Poly Virtual Tour Brief](https://docs.google.com/document/d/1KFxSek3xubSyxoo7UeFDOJGK2J3Jbt1TP-mtxb-HVr4/edit?usp=sharing). This would be the frontend application of the tour where users would walk around and explore key areas of the Cal Poly Campus. In the demo, you'll be strolling through John's front yard.
 
-[Check it out Live](www.google.com)
+[Check it out Live](https://sleepy-mclean-e6f76f.netlify.app)
 
 This will push your browser. For the smoothest experience, use Safari.
 
