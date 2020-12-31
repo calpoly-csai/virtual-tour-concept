@@ -45,21 +45,20 @@ export default function Tour() {
 
   return (
     <div className="tour" css={tourStyle}>
+      <Loader />
       <Canvas camera={[0, 0, 0]} style={{ display: isPath ? "none" : "block" }}>
         {!isPath && (
           <>
             <pointLight intensity={2} position={[7, 5, 1]} />
-            <Suspense fallback={<Loader />}>
-              <Panorama {...location} onPathChosen={handlePathChoice} />
-              <OrbitControls
-                position={[0, 0, 0]}
-                enableZoom={false}
-                enablePan={false}
-                maxPolarAngle={1.57}
-                minPolarAngle={1.571}
-                maxDistance={0.1}
-              />
-            </Suspense>
+            <Panorama {...location} onPathChosen={handlePathChoice} />
+            <OrbitControls
+              position={[0, 0, 0]}
+              enableZoom={false}
+              enablePan={false}
+              maxPolarAngle={1.57}
+              minPolarAngle={1.571}
+              maxDistance={0.1}
+            />
           </>
         )}
       </Canvas>
