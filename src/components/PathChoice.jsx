@@ -5,7 +5,7 @@ import { Html } from "@react-three/drei";
 const controlPanelCss = css`
   background-color: white;
   border-radius: 7px;
-  opacity: 0.7;
+  opacity: 0.75;
   padding: 20px 50px;
   text-align: center;
   cursor: pointer;
@@ -13,7 +13,7 @@ const controlPanelCss = css`
   transition: box-shadow 0.6s;
 
   &:hover {
-    box-shadow: 0 0 20px #000000;
+    box-shadow: 0 0 25px #ffffff;
   }
 `;
 

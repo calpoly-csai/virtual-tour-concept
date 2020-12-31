@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { InView } from "react-intersection-observer";
 const pathCss = css`
   width: 100%;
@@ -36,12 +36,20 @@ const navButtonCss = css`
   left: 50%;
   transform: translateX(-50%);
   bottom: 20px;
+  opacity: 0.75;
   padding: 15px 30px;
+  border-width: 0;
   border-radius: 5px;
   pointer-events: all;
-  transition: opacity 0.5s;
-  opacity: 1;
+  transition: opacity 0.5s, box-shadow 0.6s;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: white;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 25px #ffffff;
+  }
 `;
 
 const hiddenCss = css`
@@ -92,7 +100,8 @@ export default function Path(props) {
     const onScroll = () => {
       if (scrollUpdated) {
         frame = requestAnimationFrame(() => {
-          videoRef.current.currentTime = window.scrollY * progScalar;
+          videoRef.current &&
+            (videoRef.current.currentTime = window.scrollY * progScalar);
           scrollUpdated = true;
         });
       }
@@ -131,9 +140,6 @@ export default function Path(props) {
 
       <NavButton
         detectorCss={topDetectorCss}
-        buttonCss={css`
-          background-color: red;
-        `}
         onClick={() => props.onPathEnd(false)}
       >
         Go back

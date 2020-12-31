@@ -2,12 +2,11 @@
 import { Canvas } from "react-three-fiber";
 import Panorama from "./Panorama";
 import { css } from "@emotion/react";
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense } from "react";
 import TourGraph from "../assets/tour-graph.json";
 import { OrbitControls } from "@react-three/drei";
 import Path from "./Path";
 import Loader from "./Loader";
-import useGraphAsset from "../hooks/useGraphAsset";
 
 const tourStyle = css`
   width: 100%;
@@ -24,9 +23,8 @@ const instructionsCss = css`
 `;
 
 export default function Tour() {
-  const [location, setLocation] = useState(TourGraph.tile);
+  const [location, setLocation] = useState(TourGraph.porch);
   const [locationHistory, setLocationHistory] = useState([]);
-  const asset = useGraphAsset(location);
   const isPath = !!location.video;
   const instructions = isPath
     ? "Scroll to walk forward and backward."
@@ -52,15 +50,13 @@ export default function Tour() {
           <>
             <pointLight intensity={2} position={[7, 5, 1]} />
             <Suspense fallback={<Loader />}>
-              <Panorama
-                {...location}
-                image={asset}
-                onPathChosen={handlePathChoice}
-              />
+              <Panorama {...location} onPathChosen={handlePathChoice} />
               <OrbitControls
                 position={[0, 0, 0]}
                 enableZoom={false}
                 enablePan={false}
+                maxPolarAngle={1.57}
+                minPolarAngle={1.571}
                 maxDistance={0.1}
               />
             </Suspense>

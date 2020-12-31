@@ -1,17 +1,47 @@
 {
-    "tile": {
-      "image": "tile-pano.jpg",
+    "porch": {
+      "image": "porch.jpg",
       "paths": [
         {
-          "title": "To Living Room",
-          "position": [0,0,-9],
-          "destination": "livingRoom",
-          "video": "tile_living-room.mp4"
+          "title": "To Tree",
+          "position": [9,3,0],
+          "destination": "tree",
+          "video": "porch_tree.mp4"
         }
       ]
     },
-    "livingRoom": {
-      "image": "living-room.jpg",
-      "paths": []
+    "tree": {
+      "image": "tree.jpg",
+      "paths": [
+        {
+          "title": "To Bench",
+          "position": [1,0,-9],
+          "destination": "bench",
+          "video": "tree_bench.mp4"
+        }
+      ]
+    },
+    "bench": {
+      "image": "bench.jpg",
+      "paths": [
+        {
+          "title": "To Gate",
+          "position": [9,0,-1],
+          "destination": "gate",
+          "video": "bench_gate.mp4"
+        }
+      ]
+    },
+    "gate": {
+      "image": "gate.jpg",
+      "paths": [
+        {
+          "title": "To Porch",
+          "position": [5,0,5],
+          "destination": "porch",
+          "video": "gate_porch.mp4"
+        }
+      ]
     }
+    
 }
