@@ -3,10 +3,11 @@ import { css } from "@emotion/react";
 import { Html } from "@react-three/drei";
 
 const controlPanelCss = css`
-  background-color: pink;
+  background-color: rgb(193, 255, 204);
   border-radius: 3px;
   opacity: 0.75;
-  padding: 20px 100px;
+  padding: 20px 20px;
+  width: 300px;
   text-align: center;
   cursor: pointer;
   box-shadow: 0 0 30px transparent;
