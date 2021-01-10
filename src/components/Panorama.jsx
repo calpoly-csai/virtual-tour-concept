@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { TextureLoader, DoubleSide, Texture } from "three";
+import PathOverlay from "./PathOverlay";
 import PathChoice from "./PathChoice";
 
 const textureCache = {};
@@ -23,12 +24,28 @@ export default function Panorama(props) {
 
   useEffect(loadPanorama, [props.image]);
 
+  const [interaction, setInteraction] = useState("");
+
+  const handleInteraction = (i) => {
+    setInteraction(i);
+  };
+
   let choices = props.paths.map((path, i) => (
     <PathChoice
       {...path}
       scaleFactor={12}
       key={path.title}
       onClick={() => props.onPathChosen(i)}
+    />
+  ));
+
+  let overlays = props.overlays.map((overlay, i) => (
+    <PathOverlay
+      {...overlay}
+      scaleFactor={12}
+      key={overlay.title}
+      interaction={interaction}
+      onClick={() => handleInteraction(overlay.information)}
     />
   ));
 
@@ -39,6 +56,7 @@ export default function Panorama(props) {
         <meshBasicMaterial map={texture} side={DoubleSide} />
       </mesh>
       {choices}
+      {overlays}
     </group>
   );
 }
