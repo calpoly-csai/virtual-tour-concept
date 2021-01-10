@@ -8,6 +8,13 @@
           "destination": "tree",
           "video": "porch_tree.mp4"
         }
+      ],
+      "overlays": [
+        {
+          "title": "What is this?",
+          "position": [9,5,3],
+          "information": "Your mom. Just kidding, it's a truck."
+        }
       ]
     },
     "tree": {
@@ -19,6 +26,8 @@
           "destination": "bench",
           "video": "tree_bench.mp4"
         }
+      ],
+      "overlays": [
       ]
     },
     "bench": {
@@ -30,6 +39,8 @@
           "destination": "gate",
           "video": "bench_gate.mp4"
         }
+      ],
+      "overlays": [
       ]
     },
     "gate": {
@@ -41,6 +52,8 @@
           "destination": "porch",
           "video": "gate_porch.mp4"
         }
+      ],
+      "overlays": [
       ]
     }
     
