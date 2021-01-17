@@ -25,12 +25,12 @@ const instructionCss = css`
   font-size: 15px;
 `;
 
-export default function PathChoice(props) {
+export default function PathChoice({ position, scaleFactor, onClick, title }) {
   return (
-    <mesh position={props.position}>
-      <Html scaleFactor={props.scaleFactor}>
-        <div css={controlPanelCss} onClick={props.onClick}>
-          <h2 css={titleCss}>{props.title}</h2>
+    <mesh position={position}>
+      <Html scaleFactor={scaleFactor}>
+        <div css={controlPanelCss} onClick={onClick}>
+          <h2 css={titleCss}>{title}</h2>
           <p css={instructionCss}>Click to Visit</p>
         </div>
       </Html>

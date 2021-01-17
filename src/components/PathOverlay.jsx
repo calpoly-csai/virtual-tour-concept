@@ -26,13 +26,13 @@ const instructionCss = css`
   font-size: 15px;
 `;
 
-export default function PathOverlay(props) {
+export default function PathOverlay({position, scaleFactor, onClick, title, interaction}) {
   return (
-    <mesh position={props.position}>
-      <Html scaleFactor={props.scaleFactor}>
-        <div css={controlPanelCss} onClick={props.onClick}>
-          <h2 css={titleCss}>{props.title}</h2>
-          <p css={instructionCss}>{props.interaction}</p>
+    <mesh position={position}>
+      <Html scaleFactor={scaleFactor}>
+        <div css={controlPanelCss} onClick={onClick}>
+          <h2 css={titleCss}>{title}</h2>
+          <p css={instructionCss}>{interaction}</p>
         </div>
       </Html>
     </mesh>

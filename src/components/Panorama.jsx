@@ -6,23 +6,25 @@ import PathChoice from "./PathChoice";
 const textureCache = {};
 
 export default function Panorama(props) {
+  let {image, paths, onPathChosen, overlays} = props;
+
   // This reference will give us direct access to the mesh
   const mesh = useRef();
   let [texture, setTexture] = useState(new Texture());
 
   function loadPanorama() {
-    if (props.image in textureCache) {
-      setTexture(textureCache[props.image]);
+    if (image in textureCache) {
+      setTexture(textureCache[image]);
       return;
     }
-    import(`../assets/${props.image}`).then((res) => {
+    import(`../assets/${image}`).then((res) => {
       const texture = new TextureLoader().load(res.default);
-      textureCache[props.image] = texture;
+      textureCache[image] = texture;
       setTexture(texture);
     });
   }
 
-  useEffect(loadPanorama, [props.image]);
+  useEffect(loadPanorama, [image]);
 
   const [interaction, setInteraction] = useState("");
 
@@ -30,16 +32,16 @@ export default function Panorama(props) {
     setInteraction(i);
   };
 
-  let choices = props.paths.map((path, i) => (
+  let choices = paths.map((path, i) => (
     <PathChoice
       {...path}
       scaleFactor={12}
       key={path.title}
-      onClick={() => props.onPathChosen(i)}
+      onClick={() => onPathChosen(i)}
     />
   ));
 
-  let overlays = props.overlays.map((overlay, i) => (
+  let pathOverlays = overlays.map((overlay, i) => (
     <PathOverlay
       {...overlay}
       scaleFactor={12}
@@ -56,7 +58,7 @@ export default function Panorama(props) {
         <meshBasicMaterial map={texture} side={DoubleSide} />
       </mesh>
       {choices}
-      {overlays}
+      {pathOverlays}
     </group>
   );
 }
