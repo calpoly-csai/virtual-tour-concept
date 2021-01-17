@@ -26,7 +26,13 @@ const instructionCss = css`
   font-size: 15px;
 `;
 
-export default function PathOverlay({position, scaleFactor, onClick, title, interaction}) {
+export default function PathOverlay({
+  position,
+  scaleFactor,
+  onClick,
+  title,
+  interaction,
+}) {
   return (
     <mesh position={position}>
       <Html scaleFactor={scaleFactor}>

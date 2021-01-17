@@ -25,7 +25,7 @@ export default class TourGraph {
   paths = [];
   locations = {};
 
-  load(graph:any): void {
+  load(graph: any): void {
     this.paths = [];
     this.locations = [];
   }

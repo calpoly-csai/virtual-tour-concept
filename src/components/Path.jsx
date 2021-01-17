@@ -138,10 +138,7 @@ export default function Path({ video, onPathEnd }) {
         type="video/mp4"
       ></video>
 
-      <NavButton
-        detectorCss={topDetectorCss}
-        onClick={() => onPathEnd(false)}
-      >
+      <NavButton detectorCss={topDetectorCss} onClick={() => onPathEnd(false)}>
         Go back
       </NavButton>
 

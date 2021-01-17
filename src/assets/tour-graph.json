@@ -1,60 +1,56 @@
 {
-    "porch": {
-      "image": "porch.jpg",
-      "paths": [
-        {
-          "title": "To Tree",
-          "position": [9,3,0],
-          "destination": "tree",
-          "video": "porch_tree.mp4"
-        }
-      ],
-      "overlays": [
-        {
-          "title": "What is this?",
-          "position": [9,5,3],
-          "information": "Your mom. Just kidding, it's a truck."
-        }
-      ]
-    },
-    "tree": {
-      "image": "tree.jpg",
-      "paths": [
-        {
-          "title": "To Bench",
-          "position": [1,0,-9],
-          "destination": "bench",
-          "video": "tree_bench.mp4"
-        }
-      ],
-      "overlays": [
-      ]
-    },
-    "bench": {
-      "image": "bench.jpg",
-      "paths": [
-        {
-          "title": "To Gate",
-          "position": [9,0,-1],
-          "destination": "gate",
-          "video": "bench_gate.mp4"
-        }
-      ],
-      "overlays": [
-      ]
-    },
-    "gate": {
-      "image": "gate.jpg",
-      "paths": [
-        {
-          "title": "To Porch",
-          "position": [5,0,5],
-          "destination": "porch",
-          "video": "gate_porch.mp4"
-        }
-      ],
-      "overlays": [
-      ]
-    }
-    
+  "porch": {
+    "image": "porch.jpg",
+    "paths": [
+      {
+        "title": "To Tree",
+        "position": [9, 3, 0],
+        "destination": "tree",
+        "video": "porch_tree.mp4"
+      }
+    ],
+    "overlays": [
+      {
+        "title": "What is this?",
+        "position": [9, 5, 3],
+        "information": "Your mom. Just kidding, it's a truck."
+      }
+    ]
+  },
+  "tree": {
+    "image": "tree.jpg",
+    "paths": [
+      {
+        "title": "To Bench",
+        "position": [1, 0, -9],
+        "destination": "bench",
+        "video": "tree_bench.mp4"
+      }
+    ],
+    "overlays": []
+  },
+  "bench": {
+    "image": "bench.jpg",
+    "paths": [
+      {
+        "title": "To Gate",
+        "position": [9, 0, -1],
+        "destination": "gate",
+        "video": "bench_gate.mp4"
+      }
+    ],
+    "overlays": []
+  },
+  "gate": {
+    "image": "gate.jpg",
+    "paths": [
+      {
+        "title": "To Porch",
+        "position": [5, 0, 5],
+        "destination": "porch",
+        "video": "gate_porch.mp4"
+      }
+    ],
+    "overlays": []
+  }
 }
