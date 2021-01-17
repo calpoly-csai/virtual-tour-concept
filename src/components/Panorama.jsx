@@ -6,7 +6,7 @@ import PathChoice from "./PathChoice";
 const textureCache = {};
 
 export default function Panorama(props) {
-  let {image, paths, onPathChosen, overlays} = props;
+  let { image, paths, onPathChosen, overlays } = props;
 
   // This reference will give us direct access to the mesh
   const mesh = useRef();
