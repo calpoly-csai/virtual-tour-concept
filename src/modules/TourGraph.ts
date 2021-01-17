@@ -1,5 +1,9 @@
 class Path {
-  constructor(start, end, asset) {
+  start: number;
+  end: number;
+  assetName: any;
+
+  constructor(start: number, end: number, asset: any) {
     this.start = start;
     this.end = end;
     this.assetName = asset;
@@ -7,7 +11,10 @@ class Path {
 }
 
 class Location {
-  constructor(asset) {
+  choices: Array<any>;
+  assetName: string;
+
+  constructor(asset: any) {
     this.choices = [];
     this.assetName = asset;
   }
@@ -18,7 +25,7 @@ export default class TourGraph {
   paths = [];
   locations = {};
 
-  load(graph) {
+  load(graph:any): void {
     this.paths = [];
     this.locations = [];
   }
