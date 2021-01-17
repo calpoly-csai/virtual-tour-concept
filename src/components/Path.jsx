@@ -85,13 +85,13 @@ const NavScrollTrigger = ({ detectorCss, onTrigger }) => (
   ></InView>
 );
 
-export default function Path(props) {
+export default function Path({ video, onPathEnd }) {
   const [videoLink, setVideoLink] = useState(null);
   const [progScalar, setProgScalar] = useState(0);
   const videoRef = useRef(null);
 
   function importVideo() {
-    import(`../assets/${props.video}`).then((res) => setVideoLink(res.default));
+    import(`../assets/${video}`).then((res) => setVideoLink(res.default));
   }
 
   function trackScroll() {
@@ -125,7 +125,7 @@ export default function Path(props) {
     };
     videoRef.current.addEventListener("loadeddata", setVidProps);
   }
-  useEffect(importVideo, [props.video]);
+  useEffect(importVideo, [video]);
   useEffect(setupVideo, [videoLink]);
   useEffect(trackScroll, [progScalar]);
 
@@ -140,14 +140,14 @@ export default function Path(props) {
 
       <NavButton
         detectorCss={topDetectorCss}
-        onClick={() => props.onPathEnd(false)}
+        onClick={() => onPathEnd(false)}
       >
         Go back
       </NavButton>
 
       <NavScrollTrigger
         detectorCss={bottomDetectorCss}
-        onTrigger={() => props.onPathEnd(true)}
+        onTrigger={() => onPathEnd(true)}
       />
     </section>
   );

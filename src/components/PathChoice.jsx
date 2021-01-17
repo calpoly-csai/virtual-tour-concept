@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Html } from "@react-three/drei";
-import { Vector3 } from "three";
 
 const controlPanelCss = css`
   background-color: white;
@@ -26,19 +25,12 @@ const instructionCss = css`
   font-size: 15px;
 `;
 
-type PathChoiceProps = {
-  position: Vector3,
-  scaleFactor: number,
-  title: string,
-  onClick: () => void
-};
-
-export default function PathChoice(props: PathChoiceProps) {
+export default function PathChoice({ position, scaleFactor, onClick, title }) {
   return (
-    <mesh position={props.position}>
-      <Html scaleFactor={props.scaleFactor}>
-        <div css={controlPanelCss} onClick={props.onClick}>
-          <h2 css={titleCss}>{props.title}</h2>
+    <mesh position={position}>
+      <Html scaleFactor={scaleFactor}>
+        <div css={controlPanelCss} onClick={onClick}>
+          <h2 css={titleCss}>{title}</h2>
           <p css={instructionCss}>Click to Visit</p>
         </div>
       </Html>
