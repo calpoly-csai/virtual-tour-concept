@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Html } from "@react-three/drei";
+import { Vector3 } from "three";
 
 const controlPanelCss = css`
   background-color: rgb(193, 255, 204);
@@ -26,7 +27,15 @@ const instructionCss = css`
   font-size: 15px;
 `;
 
-export default function PathOverlay(props) {
+type PathOverlayProps = {
+  position: Vector3,
+  scaleFactor: number,
+  title: string,
+  onClick: () => void,
+  interaction: string
+};
+
+export default function PathOverlay(props: PathOverlayProps) {
   return (
     <mesh position={props.position}>
       <Html scaleFactor={props.scaleFactor}>
