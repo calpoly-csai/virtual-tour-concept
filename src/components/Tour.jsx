@@ -2,11 +2,13 @@
 import { Canvas } from "react-three-fiber";
 import Panorama from "./Panorama";
 import { css } from "@emotion/react";
-import { useState } from "react";
-import TourGraph from "../assets/tour-graph.json";
+import { useEffect, useState } from "react";
+import TourGraphJSON from "../assets/tour-graph.json";
+import JohnsYard from "../test/johns-yard.json";
 import { OrbitControls } from "@react-three/drei";
 import Path from "./Path";
 import Loader from "./Loader";
+import Parser from "../modules/Parser";
 
 const tourStyle = css`
   width: 100%;
@@ -23,7 +25,7 @@ const instructionsCss = css`
 `;
 
 export default function Tour() {
-  const [location, setLocation] = useState(TourGraph.porch);
+  const [location, setLocation] = useState(TourGraphJSON.porch);
   const [locationHistory, setLocationHistory] = useState([]);
   const isPath = !!location.video;
   const instructions = isPath
@@ -32,7 +34,7 @@ export default function Tour() {
 
   const handlePathEnd = (moveForward) => {
     let loc = moveForward
-      ? TourGraph[location.destination]
+      ? TourGraphJSON[location.destination]
       : locationHistory[locationHistory.length - 1];
     console.log("New Location", loc);
     setLocation(loc);
@@ -42,6 +44,11 @@ export default function Tour() {
     setLocationHistory((hist) => [...hist, location]);
     setLocation(location.paths[i]);
   };
+
+  useEffect(() => {
+    let parser = new Parser();
+    parser.getGraph(JohnsYard);
+  }, []);
 
   return (
     <div className="tour" css={tourStyle}>
