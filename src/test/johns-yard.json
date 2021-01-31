@@ -1,0 +1,95 @@
+{
+    "graph1": {
+        "tourgraph_id": 1,
+        "title": "dummy_title",
+        "description": "dummy_description",
+        "image": "href:dummy_image",
+        "default_location": 1,
+        "locations": {
+            "porch": {
+                "location_id": 1,
+                "image": "porch.jpg",
+                "overlays": [
+                    {
+                        "overlay_id": 1,
+                        "title": "What is this?",
+                        "description": "Truck info overlay",
+                        "position": [9, 5, 3],
+                        "action": {
+                            "action_type": "SHOWINFO",
+                            "args": {
+                                "information": "Your mom. Just kidding, it's a truck."
+                            }
+                        }
+                    },
+                    {
+                        "overlay_id": 2,
+                        "title": "To Tree",
+                        "position": [9, 3, 0],
+                        "action": {
+                            "action_type": "TRAVERSE",
+                            "args": {
+                                "destination": 2,
+                                "video": "porch_tree.mp4"
+                            }
+                        }
+                    }
+                ]
+            },
+            "tree": {
+                "location_id": 2,
+                "image": "tree.jpg",
+                "overlays": [
+                    {
+                        "overlay_id": 3,
+                        "title": "To Bench",
+                        "position": [1, 0, -9],
+                        "action": {
+                            "action_type": "TRAVERSE",
+                            "args": {
+                                "destination": 3,
+                                "video": "tree_bench.mp4"
+                            }
+                        }
+                    }
+                ]
+            },
+            "bench": {
+                "location_id": 3,
+                "image": "bench.jpg",
+                "overlays": [
+                    {
+                        "overlay_id": 4,
+                        "title": "To Gate",
+                        "position": [9, 0, -1],
+                        "action": {
+                            "action_type": "TRAVERSE",
+                            "args": {
+                                "destination": 4,
+                                "video": "bench_gate.mp4"
+                            }
+                        }
+                    }
+                ]
+            },
+            "gate": {
+                "location_id": 4,
+                "image": "gate.jpg",
+                "overlays": [
+                    {
+                        "overlay_id": 5,
+                        "title": "To Porch",
+                        "position": [5, 0, 5],
+                        "action": {
+                            "action_type": "TRAVERSE",
+                            "args": {
+                                "destination": 1,
+                                "video": "gate_porch.mp4"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
