@@ -31,14 +31,14 @@ export default function PathOverlay({
   scaleFactor,
   onClick,
   title,
-  interaction,
+  description,
 }) {
   return (
     <mesh position={position}>
       <Html scaleFactor={scaleFactor}>
         <div css={controlPanelCss} onClick={onClick}>
           <h2 css={titleCss}>{title}</h2>
-          <p css={instructionCss}>{interaction}</p>
+          <p css={instructionCss}>{description}</p>
         </div>
       </Html>
     </mesh>

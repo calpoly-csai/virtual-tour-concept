@@ -41,10 +41,17 @@ export default function Tour() {
     console.log("New Location", loc);
     setLocation(loc);
   };
+
+  // temp comment - this is what john calls when pathchoice onclick is activated
   const handlePathChoice = (i) => {
     window.scroll({ top: 0 });
     setLocationHistory((hist) => [...hist, location]);
     setLocation(location.paths[i]);
+  };
+
+  const getLocationFromId = (graph, id) => {
+    if (!graph) return null;
+    return graph.locations.find(loc => loc.locationId === id);
   };
 
   // Parse the JSON into a TourGraph object and load location on init
@@ -52,11 +59,10 @@ export default function Tour() {
     let parser = new Parser();
     let tourGraphs = parser.getGraph(JohnsYard);
     if (tourGraphs && tourGraphs.length > 0) {
-      let graph = tourGraphs[0];
-      let locations = graph.locations;
+      let graph = tourGraphs[0]; // Default to the first graph in the list
+      let defaultLocation = getLocationFromId(graph, graph.defaultLocationId);
       setTourGraph(graph);
-      // This assumes the locations are in order
-      setLocation(locations[graph.defaultLocation]);
+      setLocation(defaultLocation);
     }
   }, []);
 

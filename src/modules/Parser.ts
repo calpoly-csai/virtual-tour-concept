@@ -1,8 +1,6 @@
 import { TourGraph } from "./Objects/TourGraph";
 import { Location } from "./Objects/Location";
 import { Overlay } from "./Objects/Overlay";
-import { Action } from "./Objects/Action";
-import { actionTypeMapping } from "./Objects/ActionTypes/ActionType";
 
 // Type for the json object
 type ActionJSON = {action_type: string, args: object};
@@ -11,19 +9,18 @@ export default class Parser {
     let graphs: TourGraph[] = [];
 
     for (let key in graphObj) {
-      let {tourgraph_id, title, description, image, locations, default_location} = graphObj[key];
+      let {tourgraph_id, title, description, image, locations, default_location_id} = graphObj[key];
       let newGraph = new TourGraph(
         tourgraph_id,
         title,
         description,
         image,
         this.getLocations(locations),
-        default_location
+        default_location_id
       );
       graphs.push(newGraph);
     }
 
-    console.log(graphs);
     return graphs;
   }
 
@@ -48,28 +45,19 @@ export default class Parser {
     let overlays: Overlay[] = [];
 
     for (let key in overlayObj) {
-      let {overlay_id, title, description, parent, position, action} = overlayObj[key];
+      let {overlay_id, overlay_type, title, description, parent, position, args} = overlayObj[key];
       let newOverlay = new Overlay(
         overlay_id,
+        overlay_type,
         title,
         description,
         parent,
         position,
-        this.getAction(action)
+        args
       );
       overlays.push(newOverlay);
     }
 
     return overlays;
-  }
-
-  private getAction(actionObj: ActionJSON): Action {
-    let {action_type, args} = actionObj;
-    let action = new Action(
-      actionTypeMapping[action_type](),
-      args
-    );
-
-    return action;
   }
 }

@@ -4,7 +4,7 @@
         "title": "dummy_title",
         "description": "dummy_description",
         "image": "href:dummy_image",
-        "default_location": 1,
+        "default_location_id": 1,
         "locations": {
             "porch": {
                 "location_id": 1,
@@ -12,26 +12,22 @@
                 "overlays": [
                     {
                         "overlay_id": 1,
+                        "overlay_type": "SHOWINFO",
                         "title": "What is this?",
                         "description": "Truck info overlay",
                         "position": [9, 5, 3],
-                        "action": {
-                            "action_type": "SHOWINFO",
-                            "args": {
-                                "information": "Your mom. Just kidding, it's a truck."
-                            }
+                        "args": {
+                            "information": "Your mom. Just kidding, it's a truck."
                         }
                     },
                     {
                         "overlay_id": 2,
+                        "overlay_type": "TRAVERSE",
                         "title": "To Tree",
                         "position": [9, 3, 0],
-                        "action": {
-                            "action_type": "TRAVERSE",
-                            "args": {
-                                "destination": 2,
-                                "video": "porch_tree.mp4"
-                            }
+                        "args": {
+                            "destination": 2,
+                            "video": "porch_tree.mp4"
                         }
                     }
                 ]
@@ -42,14 +38,12 @@
                 "overlays": [
                     {
                         "overlay_id": 3,
+                        "overlay_type": "TRAVERSE",
                         "title": "To Bench",
                         "position": [1, 0, -9],
-                        "action": {
-                            "action_type": "TRAVERSE",
-                            "args": {
-                                "destination": 3,
-                                "video": "tree_bench.mp4"
-                            }
+                        "args": {
+                            "destination": 3,
+                            "video": "tree_bench.mp4"
                         }
                     }
                 ]
@@ -60,14 +54,12 @@
                 "overlays": [
                     {
                         "overlay_id": 4,
+                        "overlay_type": "TRAVERSE",
                         "title": "To Gate",
                         "position": [9, 0, -1],
-                        "action": {
-                            "action_type": "TRAVERSE",
-                            "args": {
-                                "destination": 4,
-                                "video": "bench_gate.mp4"
-                            }
+                        "args": {
+                            "destination": 4,
+                            "video": "bench_gate.mp4"
                         }
                     }
                 ]
@@ -78,14 +70,12 @@
                 "overlays": [
                     {
                         "overlay_id": 5,
+                        "overlay_type": "TRAVERSE",
                         "title": "To Porch",
                         "position": [5, 0, 5],
-                        "action": {
-                            "action_type": "TRAVERSE",
-                            "args": {
-                                "destination": 1,
-                                "video": "gate_porch.mp4"
-                            }
+                        "args": {
+                            "destination": 1,
+                            "video": "gate_porch.mp4"
                         }
                     }
                 ]

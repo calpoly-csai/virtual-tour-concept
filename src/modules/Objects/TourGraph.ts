@@ -6,7 +6,7 @@ export class TourGraph {
   description: string;
   image: string;
   locations: Location[];
-  defaultLocation: Location;
+  defaultLocationId: Location;
 
   constructor(
     tourgraphId: number,
@@ -14,13 +14,13 @@ export class TourGraph {
     description: string,
     image: string,
     locations: Location[],
-    defaultLocation: Location
+    defaultLocationId: Location
   ) {
       this.tourgraphId = tourgraphId;
       this.title = title;
       this.description = description;
       this.image = image;
       this.locations = locations;
-      this.defaultLocation = defaultLocation;
+      this.defaultLocationId = defaultLocationId;
   }
 }
