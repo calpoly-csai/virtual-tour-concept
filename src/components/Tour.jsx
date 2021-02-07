@@ -25,9 +25,11 @@ const instructionsCss = css`
 `;
 
 export default function Tour() {
-  const [location, setLocation] = useState(TourGraphJSON.porch);
+  const [tourGraph, setTourGraph] = useState(null);
+  const [location, setLocation] = useState(null);
   const [locationHistory, setLocationHistory] = useState([]);
-  const isPath = !!location.video;
+  // const isPath = !!location.video;
+  const isPath = false;
   const instructions = isPath
     ? "Scroll to walk forward and backward."
     : "Click and drag to look around.";
@@ -45,21 +47,28 @@ export default function Tour() {
     setLocation(location.paths[i]);
   };
 
-  // Parse the JSON into a TourGraph object on init
+  // Parse the JSON into a TourGraph object and load location on init
   useEffect(() => {
     let parser = new Parser();
     let tourGraphs = parser.getGraph(JohnsYard);
-    console.log(tourGraphs);
+    if (tourGraphs && tourGraphs.length > 0) {
+      let graph = tourGraphs[0];
+      let locations = graph.locations;
+      setTourGraph(graph);
+      // This assumes the locations are in order
+      setLocation(locations[graph.defaultLocation]);
+    }
   }, []);
 
   return (
     <div className="tour" css={tourStyle}>
-      <Loader />
+      {!location && <Loader />}
+      { location &&
       <Canvas camera={[0, 0, 0]} style={{ display: isPath ? "none" : "block" }}>
         {!isPath && (
           <>
             <pointLight intensity={2} position={[7, 5, 1]} />
-            <Panorama {...location} onPathChosen={handlePathChoice} />
+            <Panorama location={location} onPathChosen={handlePathChoice} />
             <OrbitControls
               position={[0, 0, 0]}
               enableZoom={false}
@@ -71,7 +80,8 @@ export default function Tour() {
           </>
         )}
       </Canvas>
-      {isPath && <Path {...location} onPathEnd={handlePathEnd} />}
+}
+      {/* {isPath && <Path {...location} onPathEnd={handlePathEnd} tourGraph={tourGraph} />} */}
 
       <p css={instructionsCss}>{instructions}</p>
     </div>

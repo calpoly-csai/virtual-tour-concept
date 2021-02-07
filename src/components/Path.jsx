@@ -85,7 +85,7 @@ const NavScrollTrigger = ({ detectorCss, onTrigger }) => (
   ></InView>
 );
 
-export default function Path({ video, onPathEnd }) {
+export default function Path({ video, onPathEnd, tourGraph }) {
   const [videoLink, setVideoLink] = useState(null);
   const [progScalar, setProgScalar] = useState(0);
   const videoRef = useRef(null);

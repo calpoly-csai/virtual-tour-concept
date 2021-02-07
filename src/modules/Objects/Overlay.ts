@@ -1,7 +1,7 @@
 import { Action } from "./Action";
 
 export class Overlay {
-  overlay_id: number;
+  overlayId: number;
   title: string;
   description: string;
   parent: number;
@@ -9,14 +9,14 @@ export class Overlay {
   action: Action;
 
   constructor(
-    overlay_id: number,
+    overlayId: number,
     title: string,
     description: string,
     parent: number,
     position: number[],
     action: Action
   ) {
-    this.overlay_id = overlay_id;
+    this.overlayId = overlayId;
     this.title = title;
     this.description = description;
     this.parent = parent;

@@ -34,6 +34,7 @@ export default class Parser {
       let {location_id, image, overlays} = locObj[key];
       let newLocation = new Location(
         location_id,
+        key,
         image,
         this.getOverlays(overlays)
       );
