@@ -1,6 +1,6 @@
 import { ActionType } from "./ActionType";
 
-export class NavPortalAction implements ActionType {
+export class TraversePathAction implements ActionType {
   execute(args?: object): any {
     // Do something
   }

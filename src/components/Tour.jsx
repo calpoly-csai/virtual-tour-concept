@@ -45,9 +45,11 @@ export default function Tour() {
     setLocation(location.paths[i]);
   };
 
+  // Parse the JSON into a TourGraph object on init
   useEffect(() => {
     let parser = new Parser();
-    parser.getGraph(JohnsYard);
+    let tourGraphs = parser.getGraph(JohnsYard);
+    console.log(tourGraphs);
   }, []);
 
   return (
