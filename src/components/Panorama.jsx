@@ -1,12 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import { TextureLoader, DoubleSide, Texture } from "three";
-import PathOverlay from "./PathOverlay";
+import Overlay from "./Overlay";
 import PathChoice from "./PathChoice";
 
 const textureCache = {};
 
 export default function Panorama(props) {
-  let { image, paths, onPathChosen, overlays } = props;
+  let { location, onPathChosen, tourGraph } = props;
+  let { locationId, name, image, overlays } = location;
 
   // This reference will give us direct access to the mesh
   const mesh = useRef();
@@ -32,24 +33,26 @@ export default function Panorama(props) {
     setInteraction(i);
   };
 
-  let choices = paths.map((path, i) => (
-    <PathChoice
-      {...path}
-      scaleFactor={12}
-      key={path.title}
-      onClick={() => onPathChosen(i)}
-    />
-  ));
+  // let choices = paths.map((path, i) => (
+  //   <PathChoice
+  //     {...path}
+  //     scaleFactor={12}
+  //     key={path.title}
+  //     onClick={() => onPathChosen(i)}
+  //   />
+  // ));
 
-  let pathOverlays = overlays.map((overlay, i) => (
-    <PathOverlay
+  // TODO: Move all this actiontype stuff over to overlaytype components
+  console.log(overlays);
+  let Overlays = overlays.map((overlay, i) => {
+    <Overlay
       {...overlay}
       scaleFactor={12}
       key={overlay.title}
       interaction={interaction}
       onClick={() => handleInteraction(overlay.information)}
-    />
-  ));
+    />;
+  });
 
   return (
     <group>
@@ -57,8 +60,8 @@ export default function Panorama(props) {
         <sphereBufferGeometry args={[10, 100, 212]} />
         <meshBasicMaterial map={texture} side={DoubleSide} />
       </mesh>
-      {choices}
-      {pathOverlays}
+      {/* {choices} */}
+      {Overlays}
     </group>
   );
 }

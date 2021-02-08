@@ -2,11 +2,13 @@
 import { Canvas } from "react-three-fiber";
 import Panorama from "./Panorama";
 import { css } from "@emotion/react";
-import { useState } from "react";
-import TourGraph from "../assets/tour-graph.json";
+import { useEffect, useState } from "react";
+import TourGraphJSON from "../assets/tour-graph.json";
+import JohnsYard from "../test/johns-yard.json";
 import { OrbitControls } from "@react-three/drei";
 import Path from "./Path";
 import Loader from "./Loader";
+import Parser from "../modules/Parser";
 
 const tourStyle = css`
   width: 100%;
@@ -23,46 +25,72 @@ const instructionsCss = css`
 `;
 
 export default function Tour() {
-  const [location, setLocation] = useState(TourGraph.porch);
+  const [tourGraph, setTourGraph] = useState(null);
+  const [location, setLocation] = useState(null);
   const [locationHistory, setLocationHistory] = useState([]);
-  const isPath = !!location.video;
+  // const isPath = !!location.video;
+  const isPath = false;
   const instructions = isPath
     ? "Scroll to walk forward and backward."
     : "Click and drag to look around.";
 
   const handlePathEnd = (moveForward) => {
     let loc = moveForward
-      ? TourGraph[location.destination]
+      ? TourGraphJSON[location.destination]
       : locationHistory[locationHistory.length - 1];
     console.log("New Location", loc);
     setLocation(loc);
   };
+
+  // temp comment - this is what john calls when pathchoice onclick is activated
   const handlePathChoice = (i) => {
     window.scroll({ top: 0 });
     setLocationHistory((hist) => [...hist, location]);
     setLocation(location.paths[i]);
   };
 
+  const getLocationFromId = (graph, id) => {
+    if (!graph) return null;
+    return graph.locations.find((loc) => loc.locationId === id);
+  };
+
+  // Parse the JSON into a TourGraph object and load location on init
+  useEffect(() => {
+    let parser = new Parser();
+    let tourGraphs = parser.getGraph(JohnsYard);
+    if (tourGraphs && tourGraphs.length > 0) {
+      let graph = tourGraphs[0]; // Default to the first graph in the list
+      let defaultLocation = getLocationFromId(graph, graph.defaultLocationId);
+      setTourGraph(graph);
+      setLocation(defaultLocation);
+    }
+  }, []);
+
   return (
     <div className="tour" css={tourStyle}>
-      <Loader />
-      <Canvas camera={[0, 0, 0]} style={{ display: isPath ? "none" : "block" }}>
-        {!isPath && (
-          <>
-            <pointLight intensity={2} position={[7, 5, 1]} />
-            <Panorama {...location} onPathChosen={handlePathChoice} />
-            <OrbitControls
-              position={[0, 0, 0]}
-              enableZoom={false}
-              enablePan={false}
-              maxPolarAngle={1.57}
-              minPolarAngle={1.571}
-              maxDistance={0.1}
-            />
-          </>
-        )}
-      </Canvas>
-      {isPath && <Path {...location} onPathEnd={handlePathEnd} />}
+      {!location && <Loader />}
+      {location && (
+        <Canvas
+          camera={[0, 0, 0]}
+          style={{ display: isPath ? "none" : "block" }}
+        >
+          {!isPath && (
+            <>
+              <pointLight intensity={2} position={[7, 5, 1]} />
+              <Panorama location={location} onPathChosen={handlePathChoice} />
+              <OrbitControls
+                position={[0, 0, 0]}
+                enableZoom={false}
+                enablePan={false}
+                maxPolarAngle={1.57}
+                minPolarAngle={1.571}
+                maxDistance={0.1}
+              />
+            </>
+          )}
+        </Canvas>
+      )}
+      {/* {isPath && <Path {...location} onPathEnd={handlePathEnd} tourGraph={tourGraph} />} */}
 
       <p css={instructionsCss}>{instructions}</p>
     </div>

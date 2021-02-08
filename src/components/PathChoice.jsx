@@ -2,6 +2,8 @@
 import { css } from "@emotion/react";
 import { Html } from "@react-three/drei";
 
+// Design is the same as Overlay component
+
 const controlPanelCss = css`
   background-color: white;
   border-radius: 7px;
