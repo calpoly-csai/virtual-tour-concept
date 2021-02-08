@@ -51,7 +51,7 @@ export default function Tour() {
 
   const getLocationFromId = (graph, id) => {
     if (!graph) return null;
-    return graph.locations.find(loc => loc.locationId === id);
+    return graph.locations.find((loc) => loc.locationId === id);
   };
 
   // Parse the JSON into a TourGraph object and load location on init
@@ -69,24 +69,27 @@ export default function Tour() {
   return (
     <div className="tour" css={tourStyle}>
       {!location && <Loader />}
-      { location &&
-      <Canvas camera={[0, 0, 0]} style={{ display: isPath ? "none" : "block" }}>
-        {!isPath && (
-          <>
-            <pointLight intensity={2} position={[7, 5, 1]} />
-            <Panorama location={location} onPathChosen={handlePathChoice} />
-            <OrbitControls
-              position={[0, 0, 0]}
-              enableZoom={false}
-              enablePan={false}
-              maxPolarAngle={1.57}
-              minPolarAngle={1.571}
-              maxDistance={0.1}
-            />
-          </>
-        )}
-      </Canvas>
-}
+      {location && (
+        <Canvas
+          camera={[0, 0, 0]}
+          style={{ display: isPath ? "none" : "block" }}
+        >
+          {!isPath && (
+            <>
+              <pointLight intensity={2} position={[7, 5, 1]} />
+              <Panorama location={location} onPathChosen={handlePathChoice} />
+              <OrbitControls
+                position={[0, 0, 0]}
+                enableZoom={false}
+                enablePan={false}
+                maxPolarAngle={1.57}
+                minPolarAngle={1.571}
+                maxDistance={0.1}
+              />
+            </>
+          )}
+        </Canvas>
+      )}
       {/* {isPath && <Path {...location} onPathEnd={handlePathEnd} tourGraph={tourGraph} />} */}
 
       <p css={instructionsCss}>{instructions}</p>

@@ -42,7 +42,6 @@ export default function Panorama(props) {
   //   />
   // ));
 
-
   // TODO: Move all this actiontype stuff over to overlaytype components
   console.log(overlays);
   let Overlays = overlays.map((overlay, i) => {
@@ -52,7 +51,7 @@ export default function Panorama(props) {
       key={overlay.title}
       interaction={interaction}
       onClick={() => handleInteraction(overlay.information)}
-    />
+    />;
   });
 
   return (

@@ -16,11 +16,11 @@ export class TourGraph {
     locations: Location[],
     defaultLocationId: Location
   ) {
-      this.tourgraphId = tourgraphId;
-      this.title = title;
-      this.description = description;
-      this.image = image;
-      this.locations = locations;
-      this.defaultLocationId = defaultLocationId;
+    this.tourgraphId = tourgraphId;
+    this.title = title;
+    this.description = description;
+    this.image = image;
+    this.locations = locations;
+    this.defaultLocationId = defaultLocationId;
   }
 }

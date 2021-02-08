@@ -23,6 +23,6 @@ export class Overlay {
     this.description = description;
     this.parent = parent;
     this.position = position;
-    this.args = args
+    this.args = args;
   }
 }
