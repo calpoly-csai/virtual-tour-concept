@@ -26,7 +26,7 @@ const instructionCss = css`
   font-size: 15px;
 `;
 
-export default function PathOverlay({
+export default function Overlay({
   position,
   scaleFactor,
   onClick,
