@@ -4,6 +4,6 @@
  * @enum Symbol(string)
  */
 export const OverlayType = Object.freeze({
-  TRAVERSE: Symbol("TRAVERSE"),
-  SHOWINFO: Symbol("SHOWINFO"),
+  TRAVERSE: "TRAVERSE",
+  SHOWINFO: "SHOWINFO",
 });
