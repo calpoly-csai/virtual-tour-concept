@@ -1,16 +1,16 @@
 import { OverlayType } from "./OverlayType";
+import { TeleportInteraction, InformationInteraction } from "./Interaction";
 export class Overlay {
   overlayId: number;
-  overlayType: typeof OverlayType;
+  overlayType: typeof TeleportInteraction | typeof InformationInteraction;
   title: string;
   description: string;
   parent: number;
   position: number[];
   args: object;
-
   constructor(
     overlayId: number,
-    overlayType: typeof OverlayType,
+    overlayType: typeof TeleportInteraction | typeof InformationInteraction,
     title: string,
     description: string,
     parent: number,
