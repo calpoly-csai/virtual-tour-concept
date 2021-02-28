@@ -8,10 +8,6 @@ export class TeleportInteraction {
     this.locationId = locationId;
     this.information = information;
   }
-
-  teleport() {
-    // ?
-  }
 }
 
 export class InformationInteraction {
@@ -21,9 +17,5 @@ export class InformationInteraction {
   constructor(resourceURL: string) {
     this.interactionType = "SHOWINFO";
     this.resourceURL = resourceURL;
-  }
-
-  getInfo() {
-    // add API Information Here
   }
 }
