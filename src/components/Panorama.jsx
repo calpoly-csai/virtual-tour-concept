@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { TextureLoader, DoubleSide, Texture } from "three";
 import Overlay from "./Overlay";
-import {OverlayType} from "../modules/Objects/OverlayType";
 import PathChoice from "./PathChoice";
 
 const textureCache = {};
@@ -44,10 +43,20 @@ export default function Panorama(props) {
   // ));
 
   // TODO: Move all this actiontype stuff over to overlaytype components
+
   console.log(overlays);
   console.log(interaction);
   let Overlays = overlays.map((overlay) => {
 
+    return <Overlay
+      {...overlay}
+      scaleFactor={12}
+      key={overlay.title}
+      //interactions={OverlayInteractions}
+      onClick={() => handleInteraction(overlay.information)}
+    /> 
+
+    /*
     // TODO: Get rid of overlay types, make them action types
     switch (overlay.overlayType) {
       case OverlayType.SHOWINFO:
@@ -72,6 +81,7 @@ export default function Panorama(props) {
           onClick={() => handleInteraction(overlay.information)}
           />
     }
+    */
   });
 
   return (

@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Html } from "@react-three/drei";
+import OverlayInteractions from "./OverlayInteractions"
 
 const controlPanelCss = css`
   background-color: rgb(193, 255, 204);
@@ -22,7 +23,7 @@ const titleCss = css`
   text-align: center;
 `;
 
-const instructionCss = css`
+const descriptionCss = css`
   font-size: 15px;
 `;
 
@@ -32,13 +33,15 @@ export default function Overlay({
   onClick,
   title,
   description,
+  interactions
 }) {
   return (
     <mesh position={position}>
       <Html scaleFactor={scaleFactor}>
         <div css={controlPanelCss} onClick={onClick}>
           <h2 css={titleCss}>{title}</h2>
-          <p css={instructionCss}>{description}</p>
+          <p css={descriptionCss}>{description}</p>
+          <OverlayInteractions interactions={interactions}/>
         </div>
       </Html>
     </mesh>
