@@ -54,7 +54,13 @@ const instructionCss = css`
 // });
 
 export default function OverlayInteractions({interactions}) {
+    let key = -1;
+    let buttons = interactions.map((interaction) => {
+        key++;
+        return <button key={key}>{interaction.buttonText}</button>
+    })
+
   return (
-    <p>Overlay Interactions</p>
+      <div>{buttons}</div>
   );
 }

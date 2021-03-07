@@ -35,6 +35,7 @@ export default function Overlay({
   description,
   interactions
 }) {
+  
   return (
     <mesh position={position}>
       <Html scaleFactor={scaleFactor}>
