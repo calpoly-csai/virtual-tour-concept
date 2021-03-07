@@ -3,7 +3,8 @@
  * @readonly
  * @enum Symbol(string)
  */
-export const OverlayType = Object.freeze({
+export const InteractionType = Object.freeze({
   TRAVERSE: "TRAVERSE",
   SHOWINFO: "SHOWINFO",
+  LINK: "LINK",
 });
