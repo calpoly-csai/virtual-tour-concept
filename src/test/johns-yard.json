@@ -16,7 +16,7 @@
             "title": "What is this?",
             "description": "Truck info overlay",
             "position": [9, 5, 3],
-            "args": {
+            "interactions": {
               "information": "Your mom. Just kidding, it's a truck."
             }
           },
@@ -25,7 +25,7 @@
             "overlay_type": "TRAVERSE",
             "title": "To Tree",
             "position": [9, 3, 0],
-            "args": {
+            "interactions": {
               "destination": 2,
               "video": "porch_tree.mp4"
             }
@@ -41,7 +41,7 @@
             "overlay_type": "TRAVERSE",
             "title": "To Bench",
             "position": [1, 0, -9],
-            "args": {
+            "interactions": {
               "destination": 3,
               "video": "tree_bench.mp4"
             }
@@ -57,7 +57,7 @@
             "overlay_type": "TRAVERSE",
             "title": "To Gate",
             "position": [9, 0, -1],
-            "args": {
+            "interactions": {
               "destination": 4,
               "video": "bench_gate.mp4"
             }
@@ -73,7 +73,7 @@
             "overlay_type": "TRAVERSE",
             "title": "To Porch",
             "position": [5, 0, 5],
-            "args": {
+            "interactions": {
               "destination": 1,
               "video": "gate_porch.mp4"
             }
