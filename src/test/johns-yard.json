@@ -18,8 +18,13 @@
             "interactions": [
               {
                 "interaction_type": "SHOWINFO",
-                "button_text": "Click for more info",
+                "button_text": "What is this?",
                 "information": "Your mom. Just kidding, it's a truck."
+              },
+              {
+                "interaction_type": "LINK",
+                "button_text": "Go Google it",
+                "url": "htttps://google.com"
               }
             ]
           },

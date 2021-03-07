@@ -4,8 +4,8 @@ import { Html } from "@react-three/drei";
 import OverlayInteractions from "./OverlayInteractions"
 
 const controlPanelCss = css`
-  background-color: rgb(193, 255, 204);
-  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
   opacity: 0.75;
   padding: 20px 20px;
   width: 300px;

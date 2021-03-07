@@ -1,30 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Html } from "@react-three/drei";
 
-const controlPanelCss = css`
-  background-color: rgb(193, 255, 204);
-  border-radius: 3px;
-  opacity: 0.75;
-  padding: 20px 20px;
-  width: 300px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 0 30px transparent;
-  transition: box-shadow 0.6s;
-
-  &:hover {
-    box-shadow: 0 0 25px #ffffff;
-  }
+const buttonCss = css`
+    color: #ffffff;
+    background-color: blue;
+    text-align: center;
 `;
 
-const titleCss = css`
-  text-align: center;
-`;
-
-const instructionCss = css`
-  font-size: 15px;
-`;
 
 // let interactions = somethinghere.map((interaction) => {
 
@@ -57,7 +39,7 @@ export default function OverlayInteractions({interactions}) {
     let key = -1;
     let buttons = interactions.map((interaction) => {
         key++;
-        return <button key={key}>{interaction.buttonText}</button>
+        return <button css={buttonCss} key={key}>{interaction.buttonText}</button>
     })
 
   return (
