@@ -12,23 +12,29 @@
         "overlays": [
           {
             "overlay_id": 1,
-            "overlay_type": "SHOWINFO",
             "title": "What is this?",
             "description": "Truck info overlay",
             "position": [9, 5, 3],
-            "interactions": {
-              "information": "Your mom. Just kidding, it's a truck."
-            }
+            "interactions": [
+              {
+                "interaction_type": "SHOWINFO",
+                "button_text": "Click for more info",
+                "information": "Your mom. Just kidding, it's a truck."
+              }
+            ]
           },
           {
             "overlay_id": 2,
-            "overlay_type": "TRAVERSE",
             "title": "To Tree",
             "position": [9, 3, 0],
-            "interactions": {
-              "destination": 2,
-              "video": "porch_tree.mp4"
-            }
+            "interactions": [
+              {
+                "interaction_type": "TRAVERSE",
+                "button_text": "Go to tree",
+                "destination_id": 2,
+                "video": "porch_tree.mp4"
+              }
+            ]
           }
         ]
       },
@@ -38,13 +44,16 @@
         "overlays": [
           {
             "overlay_id": 3,
-            "overlay_type": "TRAVERSE",
             "title": "To Bench",
             "position": [1, 0, -9],
-            "interactions": {
-              "destination": 3,
-              "video": "tree_bench.mp4"
-            }
+            "interactions": [
+              {
+                "interaction_type": "TRAVERSE",
+                "button_text": "Go to bench",
+                "destination_id": 3,
+                "video": "tree_bench.mp4"
+              }
+            ] 
           }
         ]
       },
@@ -54,13 +63,16 @@
         "overlays": [
           {
             "overlay_id": 4,
-            "overlay_type": "TRAVERSE",
             "title": "To Gate",
             "position": [9, 0, -1],
-            "interactions": {
-              "destination": 4,
-              "video": "bench_gate.mp4"
-            }
+            "interactions": [
+              {
+                "interaction_type": "TRAVERSE",
+                "button_text": "Go to gate",
+                "destination_id": 4,
+                "video": "bench_gate.mp4"
+              }
+            ]
           }
         ]
       },
@@ -70,13 +82,16 @@
         "overlays": [
           {
             "overlay_id": 5,
-            "overlay_type": "TRAVERSE",
             "title": "To Porch",
             "position": [5, 0, 5],
-            "interactions": {
-              "destination": 1,
-              "video": "gate_porch.mp4"
-            }
+            "interactions": [
+              {
+                "interaction_type": "TRAVERSE",
+                "button_text": "Go to Porch",
+                "destination_id": 1,
+                "video": "gate_porch.mp4"
+              }
+            ]
           }
         ]
       }
