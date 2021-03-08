@@ -1,9 +1,13 @@
 import { TourGraph } from "./Objects/TourGraph";
 import { Location } from "./Objects/Location";
 import { Overlay } from "./Objects/Overlay";
-
-// Type for the json object
-type ActionJSON = { action_type: string; args: object };
+import {
+  Interaction,
+  InfoInteraction,
+  LinkInteraction,
+  TraverseInteraction,
+} from "./Objects/Interactions";
+import { InteractionType } from "./Objects/InteractionType";
 export default class Parser {
   getGraph(graphObj: Record<string, any>): TourGraph[] {
     let graphs: TourGraph[] = [];
@@ -54,25 +58,72 @@ export default class Parser {
     for (let key in overlayObj) {
       let {
         overlay_id,
-        overlay_type,
         title,
         description,
         parent,
         position,
-        args,
+        interactions,
       } = overlayObj[key];
+
       let newOverlay = new Overlay(
         overlay_id,
-        overlay_type,
         title,
         description,
         parent,
         position,
-        args
+        this.getInteractions(interactions)
       );
       overlays.push(newOverlay);
     }
 
     return overlays;
+  }
+
+  private getInteractions(interactionObj: Record<string, any>): Interaction[] {
+    let interactions: Interaction[] = [];
+
+    for (let key in interactionObj) {
+      let interaction = interactionObj[key];
+      let interaction_type = interactionObj[key]["interaction_type"];
+      let { button_text } = interaction;
+
+      // determine type of interaction
+      switch (interaction_type) {
+        case InteractionType.SHOWINFO:
+          let { information } = interaction;
+
+          let newInfoInteraction = new InfoInteraction(
+            button_text,
+            information
+          );
+
+          interactions.push(newInfoInteraction);
+          break;
+
+        case InteractionType.LINK:
+          let { url } = interaction;
+
+          let newLinkInteraction = new LinkInteraction(button_text, url);
+
+          interactions.push(newLinkInteraction);
+          break;
+
+        case InteractionType.TRAVERSE:
+          let { destination_id, video } = interaction;
+
+          let newTraverseInteraction = new TraverseInteraction(
+            button_text,
+            destination_id,
+            video
+          );
+
+          interactions.push(newTraverseInteraction);
+          break;
+
+        default:
+          console.error("Invalid interaction type", interaction_type);
+      }
+    }
+    return interactions;
   }
 }
