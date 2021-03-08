@@ -34,13 +34,14 @@ export default function Panorama(props) {
 
   console.log(overlays);
   let overlayComponents = overlays.map((overlay) => {
-
-    return <Overlay
-      {...overlay}
-      scaleFactor={12}
-      key={overlay.title}
-      onClick={() => handleInteraction(overlay.information)}
-    /> 
+    return (
+      <Overlay
+        {...overlay}
+        scaleFactor={12}
+        key={overlay.title}
+        onClick={() => handleInteraction(overlay.information)}
+      />
+    );
   });
 
   return (
