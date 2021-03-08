@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Link, ArrowRight, Info } from "react-feather";
-
-const buttonTypeIcons = {
-  LINK: Link,
-  TRAVERSE: ArrowRight,
-  SHOWINFO: Info,
-};
+import {
+  InfoInteraction,
+  LinkInteraction,
+  TraverseInteraction,
+} from "../modules/Objects/Interactions";
 
 const buttonCss = css`
   padding: 7px 15px;
@@ -63,9 +62,21 @@ const buttonCss = css`
 //   }
 // });
 
+// returns the proper icon for each interaction
+function returnIcon(interaction) {
+  if (interaction instanceof InfoInteraction) {
+    return Info;
+  } else if (interaction instanceof LinkInteraction) {
+    return Link;
+  } else if (interaction instanceof TraverseInteraction) {
+    return ArrowRight;
+  }
+}
+
 export default function OverlayInteractions({ interactions }) {
   let buttons = interactions.map((interaction, key) => {
-    const Icon = buttonTypeIcons["LINK"];
+    const Icon = returnIcon(interaction);
+    console.log(Icon);
     return (
       <button css={buttonCss} key={key}>
         <Icon />
