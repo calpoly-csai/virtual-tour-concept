@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Html } from "@react-three/drei";
-import { Interaction } from "../modules/Objects/Interactions";
+import { Interaction } from "../types/Interactions";
 import OverlayInteractions from "./OverlayInteractions";
 
 const controlPanelCss = css`

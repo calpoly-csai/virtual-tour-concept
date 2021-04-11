@@ -1,13 +1,13 @@
-import { TourGraph } from "./Objects/TourGraph";
-import { Location } from "./Objects/Location";
-import { Overlay } from "./Objects/Overlay";
+import { TourGraph } from "../types/TourGraph";
+import { Location } from "../types/Location";
+import { Overlay } from "../types/Overlay";
 import {
   Interaction,
   InfoInteraction,
   LinkInteraction,
   TraverseInteraction,
-} from "./Objects/Interactions";
-import { InteractionType } from "./Objects/InteractionType";
+} from "../types/Interactions";
+import { InteractionType } from "../types/InteractionType";
 export default class Parser {
   getGraph(graphObj: Record<string, any>): TourGraph[] {
     let graphs: TourGraph[] = [];

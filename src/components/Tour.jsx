@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 import Panorama from "./Panorama";
 import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
