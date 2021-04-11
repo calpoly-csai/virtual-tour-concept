@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Html } from "@react-three/drei";
+import { Interaction } from "../modules/Objects/Interactions";
 import OverlayInteractions from "./OverlayInteractions";
 
 const controlPanelCss = css`
@@ -26,14 +27,25 @@ const descriptionCss = css`
   font-size: 15px;
 `;
 
-export default function Overlay({
-  position,
-  scaleFactor,
-  onClick,
-  title,
-  description,
-  interactions,
-}) {
+interface OverlayArgs {
+  position: number[];
+  scaleFactor: number;
+  onClick(): void;
+  title: string;
+  description: string;
+  interactions: Interaction[];
+}
+
+export default function Overlay(args: OverlayArgs) {
+  let {
+    position,
+    scaleFactor,
+    onClick,
+    title,
+    description,
+    interactions,
+  } = args;
+
   return (
     <mesh position={position}>
       <Html scaleFactor={scaleFactor}>
