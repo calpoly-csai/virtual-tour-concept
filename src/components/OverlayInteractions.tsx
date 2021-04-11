@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 import { Link, ArrowRight, Info } from "react-feather";
 import {
+  Interaction,
   InfoInteraction,
   LinkInteraction,
   TraverseInteraction,
@@ -35,50 +36,42 @@ const buttonCss = css`
   }
 `;
 
-// let interactions = somethinghere.map((interaction) => {
-
-//   switch (interaction.interactionType) {
-//     case InteractionType.SHOWINFO:
-//       return <Interaction
-//         {...interaction}
-//         scaleFactor={12}
-//         key={overlay.title}
-//         interaction={interaction}
-//         onClick={() => handleInteraction(interaction.information)}
-//         />
-
-//     // case OverlayType.TRAVERSE:
-
-//     //   break;
-
-//     default:
-//       return <Interaction
-//         {...interaction}
-//         scaleFactor={12}
-//         key="Not a valid interaction"
-//         interaction={interaction}
-//         onClick={() => handleInteraction(interaction.information)}
-//         />
-//   }
-// });
-
 // returns the proper icon for each interaction
-function returnIcon(interaction) {
-  if (interaction instanceof InfoInteraction) {
-    return Info;
-  } else if (interaction instanceof LinkInteraction) {
+function returnIcon(interaction: Interaction) {
+  if (interaction instanceof LinkInteraction) {
     return Link;
   } else if (interaction instanceof TraverseInteraction) {
     return ArrowRight;
   }
+  // default to the Info icon
+  return Info;
 }
 
-export default function OverlayInteractions({ interactions }) {
+// opens a new tab with the given link
+function linkOnClick(link: string) {
+  window.open(link, "_blank");
+}
+
+// returns the proper onClick method for each interaction
+function returnOnClick(interaction: Interaction) {
+  if (interaction instanceof LinkInteraction) {
+    return () => linkOnClick(interaction.url);
+  } else {
+    return () => {};
+  }
+}
+
+interface OverlayInteractionsArgs {
+  interactions: Interaction[];
+}
+
+export default function OverlayInteractions(args: OverlayInteractionsArgs) {
+  let { interactions } = args;
   let buttons = interactions.map((interaction, key) => {
     const Icon = returnIcon(interaction);
-    console.log(Icon);
+    let onClick = returnOnClick(interaction);
     return (
-      <button css={buttonCss} key={key}>
+      <button css={buttonCss} key={key} onClick={onClick}>
         <Icon />
         <span>{interaction.buttonText}</span>
       </button>
