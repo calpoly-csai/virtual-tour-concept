@@ -1,6 +1,6 @@
 import { TourGraph } from "../types/TourGraph";
 import { Location } from "../types/Location";
-import { Overlay } from "../types/Overlay";
+import { OverlayData } from "../types/OverlayData";
 import {
   Interaction,
   InfoInteraction,
@@ -52,8 +52,8 @@ export default class Parser {
     return locations;
   }
 
-  private getOverlays(overlayObj: Record<string, any>): Overlay[] {
-    let overlays: Overlay[] = [];
+  private getOverlays(overlayObj: Record<string, any>): OverlayData[] {
+    let overlays: OverlayData[] = [];
 
     for (let key in overlayObj) {
       let {
@@ -65,7 +65,7 @@ export default class Parser {
         interactions,
       } = overlayObj[key];
 
-      let newOverlay = new Overlay(
+      let newOverlay = new OverlayData(
         overlay_id,
         title,
         description,

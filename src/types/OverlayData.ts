@@ -1,18 +1,21 @@
-export class Overlay {
+import { Vector3 } from "three";
+import { Interaction } from "./Interactions";
+
+export class OverlayData {
   overlayId: number;
   title: string;
   description: string;
   parent: number;
-  position: number[];
-  interactions: object[];
+  position: Vector3;
+  interactions: Interaction[];
 
   constructor(
     overlayId: number,
     title: string,
     description: string,
     parent: number,
-    position: number[],
-    interactions: object[]
+    position: Vector3,
+    interactions: Interaction[]
   ) {
     this.overlayId = overlayId;
     this.title = title;

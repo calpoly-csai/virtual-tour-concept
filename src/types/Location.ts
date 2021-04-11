@@ -1,16 +1,16 @@
-import { Overlay } from "./Overlay";
+import { OverlayData } from "./OverlayData";
 
 export class Location {
   locationId: number;
   name: string;
   image: string;
-  overlays: Overlay[];
+  overlays: OverlayData[];
 
   constructor(
     locationId: number,
     name: string,
     image: string,
-    overlays: Overlay[]
+    overlays: OverlayData[]
   ) {
     this.locationId = locationId;
     this.name = name;

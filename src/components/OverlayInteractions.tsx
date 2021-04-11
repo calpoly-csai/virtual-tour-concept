@@ -6,7 +6,7 @@ import {
   InfoInteraction,
   LinkInteraction,
   TraverseInteraction,
-} from "../modules/Objects/Interactions";
+} from "../types/Interactions";
 
 const buttonCss = css`
   padding: 7px 15px;
@@ -61,11 +61,11 @@ function returnOnClick(interaction: Interaction) {
   }
 }
 
-interface OverlayInteractionsArgs {
+interface OverlayInteractionsProps {
   interactions: Interaction[];
 }
 
-export default function OverlayInteractions(args: OverlayInteractionsArgs) {
+export default function OverlayInteractions(args: OverlayInteractionsProps) {
   let { interactions } = args;
   let buttons = interactions.map((interaction, key) => {
     const Icon = returnIcon(interaction);
