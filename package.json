@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.1.4",
-    "@react-three/drei": "^2.2.12",
+    "@react-three/drei": "^3.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -14,7 +14,7 @@
     "react-intersection-observer": "^8.31.0",
     "react-scripts": "4.0.1",
     "react-three-fiber": "^5.3.10",
-    "three": "^0.124.0",
+    "three": "^0.127.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/feather-icons": "^4.7.0",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.37",
     "@types/react": "^17.0.3",
