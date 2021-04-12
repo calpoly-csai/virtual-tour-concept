@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { TextureLoader, DoubleSide, Texture } from "three";
-import { Overlay, OverlayProps } from "./Overlay";
+import Overlay from "./Overlay";
 import { Location } from "../types/Location";
 import { OverlayData } from "../types/OverlayData";
 
@@ -39,7 +39,6 @@ export default function Panorama(props: PanoramaProps) {
   //   setInteraction(i);
   // };
 
-  console.log(overlays);
   let overlayComponents = overlays.map((overlay: OverlayData) => {
     return (
       <Overlay

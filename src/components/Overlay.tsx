@@ -28,7 +28,7 @@ const descriptionCss = css`
   font-size: 15px;
 `;
 
-export interface OverlayProps {
+interface OverlayProps {
   position: Vector3;
   distanceFactor: number;
   onClick(): void;
@@ -37,7 +37,7 @@ export interface OverlayProps {
   interactions: Interaction[];
 }
 
-export function Overlay(props: OverlayProps) {
+export default function Overlay(props: OverlayProps) {
   let {
     position,
     distanceFactor,
