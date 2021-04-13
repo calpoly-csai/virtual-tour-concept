@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
 import JohnsYard from "../test/johns-yard.json";
 import { OrbitControls } from "@react-three/drei";
-import Path from "./Path";
+// import Path from "./Path";
 import Loader from "./Loader";
 import Parser from "../modules/Parser";
 import { TourGraph } from "../types/TourGraph";
@@ -26,9 +26,9 @@ const instructionsCss = css`
 `;
 
 export default function Tour() {
-  const [tourGraph, setTourGraph] = useState<TourGraph | null>(null);
+  // const [tourGraph, setTourGraph] = useState<TourGraph | null>(null);
   const [location, setLocation] = useState<Location | null>(null);
-  const [locationHistory, setLocationHistory] = useState([]);
+  // const [locationHistory, setLocationHistory] = useState([]);
   // const isPath = !!location.video;
   const isPath = false;
   const instructions = isPath
@@ -62,7 +62,7 @@ export default function Tour() {
     if (tourGraphs && tourGraphs.length > 0) {
       let graph = tourGraphs[0]; // Default to the first graph in the list
       let defaultLocation = getLocationFromId(graph, graph.defaultLocationId);
-      setTourGraph(graph);
+      // setTourGraph(graph);
       setLocation(defaultLocation);
     }
   }, []);

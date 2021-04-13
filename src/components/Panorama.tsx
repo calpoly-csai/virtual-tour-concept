@@ -5,7 +5,6 @@ import { Location } from "../types/Location";
 import { OverlayData } from "../types/OverlayData";
 
 let textureCache: Texture | null = null;
-// let textureCache = null;
 
 interface PanoramaProps {
   location: Location;
@@ -13,7 +12,7 @@ interface PanoramaProps {
 
 export default function Panorama(props: PanoramaProps) {
   let { location } = props;
-  let { locationId, name, image, overlays } = location;
+  let { image, overlays } = location;
 
   // This reference will give us direct access to the mesh
   const mesh = useRef();
@@ -33,7 +32,7 @@ export default function Panorama(props: PanoramaProps) {
 
   useEffect(loadPanorama, [image]);
 
-  const [interaction, setInteraction] = useState("");
+  // const [interaction, setInteraction] = useState("");
 
   // const handleInteraction = (i) => {
   //   setInteraction(i);

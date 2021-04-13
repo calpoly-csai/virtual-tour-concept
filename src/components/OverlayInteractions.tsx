@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import { Link, ArrowRight, Info } from "react-feather";
 import {
   Interaction,
-  InfoInteraction,
   LinkInteraction,
   TraverseInteraction,
 } from "../types/Interactions";
