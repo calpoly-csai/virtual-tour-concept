@@ -1,36 +1,35 @@
-export class InfoInteraction {
+export abstract class Interaction {
   buttonText: string;
+
+  constructor(buttonText: string) {
+    this.buttonText = buttonText;
+  }
+}
+export class InfoInteraction extends Interaction {
   information: string;
 
   constructor(buttonText: string, information: string) {
-    this.buttonText = buttonText;
+    super(buttonText);
     this.information = information;
   }
 }
 
-export class TraverseInteraction {
-  buttonText: string;
+export class TraverseInteraction extends Interaction {
   destinationId: number;
   video: string;
 
   constructor(buttonText: string, destinationId: number, video: string) {
-    this.buttonText = buttonText;
+    super(buttonText);
     this.destinationId = destinationId;
     this.video = video;
   }
 }
 
-export class LinkInteraction {
-  buttonText: string;
+export class LinkInteraction extends Interaction {
   url: string;
 
   constructor(buttonText: string, url: string) {
-    this.buttonText = buttonText;
+    super(buttonText);
     this.url = url;
   }
 }
-
-export type Interaction =
-  | InfoInteraction
-  | TraverseInteraction
-  | LinkInteraction;

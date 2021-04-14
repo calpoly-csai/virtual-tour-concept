@@ -1,45 +1,51 @@
 import { useRef, useState, useEffect } from "react";
 import { TextureLoader, DoubleSide, Texture } from "three";
 import Overlay from "./Overlay";
+import { Location } from "../types/Location";
+import { OverlayData } from "../types/OverlayData";
 
-const textureCache = {};
+let textureCache: Texture | null = null;
 
-export default function Panorama(props) {
-  let { location, onPathChosen, tourGraph } = props;
-  let { locationId, name, image, overlays } = location;
+interface PanoramaProps {
+  location: Location;
+}
+
+export default function Panorama(props: PanoramaProps) {
+  let { location } = props;
+  let { image, overlays } = location;
 
   // This reference will give us direct access to the mesh
   const mesh = useRef();
   let [texture, setTexture] = useState(new Texture());
 
   function loadPanorama() {
-    if (image in textureCache) {
-      setTexture(textureCache[image]);
+    if (textureCache) {
+      setTexture(textureCache);
       return;
     }
     import(`../assets/${image}`).then((res) => {
       const texture = new TextureLoader().load(res.default);
-      textureCache[image] = texture;
+      textureCache = texture;
       setTexture(texture);
     });
   }
 
   useEffect(loadPanorama, [image]);
 
-  const [interaction, setInteraction] = useState("");
+  // const [interaction, setInteraction] = useState("");
 
-  const handleInteraction = (i) => {
-    setInteraction(i);
-  };
+  // const handleInteraction = (i) => {
+  //   setInteraction(i);
+  // };
 
-  console.log(overlays);
-  let overlayComponents = overlays.map((overlay) => {
+  let overlayComponents = overlays.map((overlay: OverlayData) => {
     return (
       <Overlay
         {...overlay}
-        scaleFactor={12}
+        distanceFactor={12}
         key={overlay.title}
-        onClick={() => handleInteraction(overlay.information)}
+        onClick={() => {}}
+        // onClick={() => handleInteraction(overlay.information)}
       />
     );
   });
