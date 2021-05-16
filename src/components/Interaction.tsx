@@ -1,7 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { InfoInteraction, LinkInteraction } from "../types/Interactions";
+import {
+  InfoInteraction,
+  LinkInteraction,
+  TraverseInteraction,
+} from "../types/Interactions";
 import { useState } from "react";
+
+import Parser from "../modules/Parser";
+import JohnsYard from "../test/johns-yard.json";
+import { TourGraph } from "../types/TourGraph";
 
 const buttonCss = css`
   padding: 7px 15px;
@@ -67,8 +75,14 @@ interface LinkInteractionProps {
   interaction: LinkInteraction;
 }
 
-export function InfoInteractionC(args: InfoInteractionProps) {
-  const { interaction } = args;
+interface TraverseInteractionProps {
+  interaction: TraverseInteraction;
+  setLocation: any;
+}
+
+// Remove onClicks from class and set them in here
+export function InfoInteractionC(props: InfoInteractionProps) {
+  const { interaction } = props;
   const [toggleButton, setToggleButton] = useState(false);
   const { Icon, information } = interaction;
   const onClick = () => setToggleButton(!toggleButton);
@@ -84,13 +98,38 @@ export function InfoInteractionC(args: InfoInteractionProps) {
   );
 }
 
-export function LinkInteractionC(args: LinkInteractionProps) {
-  const { interaction } = args;
+export function LinkInteractionC(props: LinkInteractionProps) {
+  const { interaction } = props;
   const { Icon, onClick } = interaction;
 
   return (
     <>
       <button css={buttonCss} onClick={onClick}>
+        <Icon />
+        <span>{interaction.buttonText}</span>
+      </button>
+    </>
+  );
+}
+
+const getLocationFromId = (graph: TourGraph, id: number) => {
+  if (!graph) return null;
+  return graph.locations.find((loc) => loc.locationId === id) || null;
+};
+
+export function TraverseInteractionC(props: TraverseInteractionProps) {
+  const { interaction, setLocation } = props;
+  const { Icon, onClick } = interaction;
+
+  //   TODO: Instead of calling this again change to an emitter function
+  let parser = new Parser();
+  let tourGraphs = parser.getGraph(JohnsYard);
+  let graph = tourGraphs[0];
+  let location = getLocationFromId(graph, interaction.destinationId);
+
+  return (
+    <>
+      <button css={buttonCss} onClick={() => setLocation(location)}>
         <Icon />
         <span>{interaction.buttonText}</span>
       </button>

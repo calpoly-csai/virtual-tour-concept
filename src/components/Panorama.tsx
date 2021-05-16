@@ -8,10 +8,11 @@ let textureCache: Texture | null = null;
 
 interface PanoramaProps {
   location: Location;
+  setLocation: any;
 }
 
 export default function Panorama(props: PanoramaProps) {
-  let { location } = props;
+  let { location, setLocation } = props;
   let { image, overlays } = location;
 
   // This reference will give us direct access to the mesh
@@ -19,10 +20,11 @@ export default function Panorama(props: PanoramaProps) {
   let [texture, setTexture] = useState(new Texture());
 
   function loadPanorama() {
-    if (textureCache) {
-      setTexture(textureCache);
-      return;
-    }
+    // removed since texture cache will always have a value after init
+    // if (textureCache) {
+    //   setTexture(textureCache);
+    //   return;
+    // }
     import(`../assets/${image}`).then((res) => {
       const texture = new TextureLoader().load(res.default);
       textureCache = texture;
@@ -32,12 +34,6 @@ export default function Panorama(props: PanoramaProps) {
 
   useEffect(loadPanorama, [image]);
 
-  // const [interaction, setInteraction] = useState("");
-
-  // const handleInteraction = (i) => {
-  //   setInteraction(i);
-  // };
-
   let overlayComponents = overlays.map((overlay: OverlayData) => {
     return (
       <Overlay
@@ -45,7 +41,7 @@ export default function Panorama(props: PanoramaProps) {
         distanceFactor={12}
         key={overlay.title}
         onClick={() => {}}
-        // onClick={() => handleInteraction(overlay.information)}
+        setLocation={setLocation}
       />
     );
   });
