@@ -32,6 +32,7 @@ interface OverlayProps {
   position: Vector3;
   distanceFactor: number;
   onClick(): void;
+  setLocation(): any;
   title: string;
   description: string;
   interactions: Interaction[];
@@ -45,6 +46,7 @@ export default function Overlay(props: OverlayProps) {
     title,
     description,
     interactions,
+    setLocation,
   } = props;
 
   return (
@@ -53,7 +55,10 @@ export default function Overlay(props: OverlayProps) {
         <div css={controlPanelCss} onClick={onClick}>
           <h2 css={titleCss}>{title}</h2>
           <p css={descriptionCss}>{description}</p>
-          <OverlayInteractions interactions={interactions} />
+          <OverlayInteractions
+            interactions={interactions}
+            setLocation={setLocation}
+          />
         </div>
       </Html>
     </mesh>

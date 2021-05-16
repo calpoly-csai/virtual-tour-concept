@@ -22,6 +22,11 @@
                 "information": "Your mom. Just kidding, it's a truck."
               },
               {
+                "interaction_type": "SHOWINFO",
+                "button_text": "Testtesttest",
+                "information": "Nice"
+              },
+              {
                 "interaction_type": "LINK",
                 "button_text": "Go Google it",
                 "url": "https://google.com"

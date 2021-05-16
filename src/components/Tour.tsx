@@ -75,7 +75,7 @@ export default function Tour() {
           {!isPath && (
             <>
               <pointLight intensity={2} position={[7, 5, 1]} />
-              <Panorama location={location} />
+              <Panorama location={location} setLocation={setLocation} />
               {/* <Panorama location={location} onPathChosen={handlePathChoice} /> */}
               <OrbitControls
                 position={[0, 0, 0]}
