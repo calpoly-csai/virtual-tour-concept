@@ -119,7 +119,7 @@ const getLocationFromId = (graph: TourGraph, id: number) => {
 
 export function TraverseInteractionC(props: TraverseInteractionProps) {
   const { interaction, setLocation } = props;
-  const { Icon, onClick } = interaction;
+  const { Icon } = interaction;
 
   //   TODO: Instead of calling this again change to an emitter function
   let parser = new Parser();

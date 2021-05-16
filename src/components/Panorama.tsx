@@ -4,7 +4,7 @@ import Overlay from "./Overlay";
 import { Location } from "../types/Location";
 import { OverlayData } from "../types/OverlayData";
 
-let textureCache: Texture | null = null;
+// let textureCache: Texture | null = null;
 
 interface PanoramaProps {
   location: Location;
@@ -27,7 +27,7 @@ export default function Panorama(props: PanoramaProps) {
     // }
     import(`../assets/${image}`).then((res) => {
       const texture = new TextureLoader().load(res.default);
-      textureCache = texture;
+      // textureCache = texture;
       setTexture(texture);
     });
   }
