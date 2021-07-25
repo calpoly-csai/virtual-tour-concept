@@ -1,11 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Link, ArrowRight, Info } from "react-feather";
-import {
-  Interaction,
-  LinkInteraction,
-  TraverseInteraction,
-} from "../types/Interactions";
+import { Link, ArrowRight, Info, Aperture } from "react-feather";
 
 const buttonCss = css`
   padding: 7px 15px;
@@ -36,14 +31,19 @@ const buttonCss = css`
 `;
 
 // returns the proper icon for each interaction
-function returnIcon(interaction: Interaction) {
-  if (interaction instanceof LinkInteraction) {
-    return Link;
-  } else if (interaction instanceof TraverseInteraction) {
-    return ArrowRight;
+function getActionIcon(interaction: Tour.OverlayAction) {
+  switch (interaction.type) {
+    case "external-link":
+      return Link;
+    case "path":
+      return ArrowRight;
+    case "portal":
+      return Aperture;
+    case "info":
+      return Info;
+    default:
+      return () => <div></div>;
   }
-  // default to the Info icon
-  return Info;
 }
 
 // opens a new tab with the given link
@@ -52,27 +52,27 @@ function linkOnClick(link: string) {
 }
 
 // returns the proper onClick method for each interaction
-function returnOnClick(interaction: Interaction) {
-  if (interaction instanceof LinkInteraction) {
-    return () => linkOnClick(interaction.url);
+function getClickAction(interaction: Tour.OverlayAction) {
+  if (interaction.type === "external-link") {
+    return () => linkOnClick(interaction.link);
   } else {
     return () => {};
   }
 }
 
 interface OverlayInteractionsProps {
-  interactions: Interaction[];
+  interactions: Tour.OverlayAction[];
 }
 
-export default function OverlayInteractions(args: OverlayInteractionsProps) {
-  let { interactions } = args;
+export default function OverlayInteractions(props: OverlayInteractionsProps) {
+  let { interactions } = props;
   let buttons = interactions.map((interaction, key) => {
-    const Icon = returnIcon(interaction);
-    let onClick = returnOnClick(interaction);
+    const Icon = getActionIcon(interaction);
+    let onClick = getClickAction(interaction);
     return (
       <button css={buttonCss} key={key} onClick={onClick}>
         <Icon />
-        <span>{interaction.buttonText}</span>
+        <span>{interaction.title}</span>
       </button>
     );
   });

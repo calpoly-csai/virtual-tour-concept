@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Vector3 } from "three";
 import { Html } from "@react-three/drei";
-import { Interaction } from "../types/Interactions";
 import OverlayInteractions from "./OverlayInteractions";
 
 const controlPanelCss = css`
@@ -28,24 +26,13 @@ const descriptionCss = css`
   font-size: 15px;
 `;
 
-interface OverlayProps {
-  position: Vector3;
-  distanceFactor: number;
-  onClick(): void;
-  title: string;
-  description: string;
-  interactions: Interaction[];
+interface OverlayProps extends Tour.Overlay {
+  onClick?: () => void;
 }
 
 export default function Overlay(props: OverlayProps) {
-  let {
-    position,
-    distanceFactor,
-    onClick,
-    title,
-    description,
-    interactions,
-  } = props;
+  const distanceFactor = 12;
+  let { position, onClick, title, description, actions } = props;
 
   return (
     <mesh position={position}>
@@ -53,7 +40,7 @@ export default function Overlay(props: OverlayProps) {
         <div css={controlPanelCss} onClick={onClick}>
           <h2 css={titleCss}>{title}</h2>
           <p css={descriptionCss}>{description}</p>
-          <OverlayInteractions interactions={interactions} />
+          <OverlayInteractions interactions={actions} />
         </div>
       </Html>
     </mesh>
