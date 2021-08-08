@@ -1,11 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Link, ArrowRight, Info } from "react-feather";
-import {
-  Interaction,
-  LinkInteraction,
-  TraverseInteraction,
-} from "../types/Interactions";
+import { Link, ArrowRight, Info, Aperture } from "react-feather";
+import { useTourState } from "../hooks/useTourState";
 
 const buttonCss = css`
   padding: 7px 15px;
@@ -36,43 +32,56 @@ const buttonCss = css`
 `;
 
 // returns the proper icon for each interaction
-function returnIcon(interaction: Interaction) {
-  if (interaction instanceof LinkInteraction) {
-    return Link;
-  } else if (interaction instanceof TraverseInteraction) {
-    return ArrowRight;
+function getActionIcon(interaction: Tour.OverlayAction) {
+  switch (interaction.type) {
+    case "external-link":
+      return Link;
+    case "path":
+      return ArrowRight;
+    case "portal":
+      return Aperture;
+    case "info":
+      return Info;
+    default:
+      return () => <div></div>;
   }
-  // default to the Info icon
-  return Info;
-}
-
-// opens a new tab with the given link
-function linkOnClick(link: string) {
-  window.open(link, "_blank");
 }
 
 // returns the proper onClick method for each interaction
-function returnOnClick(interaction: Interaction) {
-  if (interaction instanceof LinkInteraction) {
-    return () => linkOnClick(interaction.url);
-  } else {
-    return () => {};
+function getClickAction(
+  interaction: Tour.OverlayAction,
+  updateTourState: ReturnType<typeof useTourState>[1]
+) {
+  switch (interaction.type) {
+    case "external-link":
+      return () => window.open(interaction.link, "_blank");
+    case "path":
+      return () => {}; // TODO: Get paths working
+    case "portal":
+      return () => {
+        updateTourState((state, graph) => {
+          state.location = graph.locations[interaction.destination];
+        });
+      };
+    default:
+      return () => {};
   }
 }
 
 interface OverlayInteractionsProps {
-  interactions: Interaction[];
+  interactions: Tour.OverlayAction[];
 }
 
-export default function OverlayInteractions(args: OverlayInteractionsProps) {
-  let { interactions } = args;
+export default function OverlayInteractions(props: OverlayInteractionsProps) {
+  const updateTourState = useTourState()[1];
+  let { interactions } = props;
   let buttons = interactions.map((interaction, key) => {
-    const Icon = returnIcon(interaction);
-    let onClick = returnOnClick(interaction);
+    const Icon = getActionIcon(interaction);
+    let onClick = getClickAction(interaction, updateTourState);
     return (
       <button css={buttonCss} key={key} onClick={onClick}>
         <Icon />
-        <span>{interaction.buttonText}</span>
+        <span>{interaction.title}</span>
       </button>
     );
   });

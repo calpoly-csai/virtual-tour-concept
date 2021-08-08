@@ -1,0 +1,88 @@
+{
+  "description": "A tour of Cal Poly",
+  "locations": {
+    "cotchettFront": {
+      "description": "Where people hang out on Thursdays",
+      "overlays": [
+        {
+          "actions": [
+            {
+              "type": "portal",
+              "title": "Dexter Mid",
+              "destination": "Dexter Mid"
+            }
+          ],
+          "description": "Center of Dexter Lawn",
+          "position": [0, 0.3738489043846559, 0.1568627450980392],
+          "title": "Dexter Mid"
+        }
+      ],
+      "panorama": "http://res.cloudinary.com/csai/image/upload/v1617501502/Cotchett_sk1nnp.jpg",
+      "title": "Cotchett Front"
+    },
+    "dexterEdge": {
+      "description": "Dexter Edge",
+      "overlays": [
+        {
+          "title": "Dexter Mid",
+          "description": "Middle of Dexter",
+          "position": [
+            0.7786592804983761,
+            0.26687059723929074,
+            0.03529411764705882
+          ],
+          "actions": [
+            {
+              "type": "portal",
+              "title": "Dexter Mid",
+              "destination": "Dexter Mid"
+            }
+          ]
+        }
+      ],
+      "panorama": "http://res.cloudinary.com/csai/image/upload/v1617501507/Dexter1_aeltrg.jpg",
+      "title": "Dexter Edge"
+    },
+    "dexterMid": {
+      "description": "Where people hang out on Thursdays",
+      "overlays": [
+        {
+          "title": "Cotchett",
+          "description": "The education building",
+          "position": [
+            0.1712775755464361,
+            0.35204790093925564,
+            0.011764705882352941
+          ],
+          "actions": [
+            {
+              "type": "portal",
+              "title": "Cotchett Front",
+              "destination": "Cotchett Front"
+            }
+          ]
+        },
+        {
+          "title": "Dexter Edge",
+          "description": "The edge of dexter",
+          "position": [
+            0.7141590932781776,
+            0.30169516574130967,
+            0.011764705882352941
+          ],
+          "actions": [
+            {
+              "type": "portal",
+              "title": "Dexter Edge",
+              "destination": "Dexter Edge"
+            }
+          ]
+        }
+      ],
+      "panorama": "http://res.cloudinary.com/csai/image/upload/v1617501513/Dexter2_exlhrj.jpg",
+      "title": "Dexter Mid"
+    }
+  },
+  "startingLocation": "dexterEdge",
+  "title": "Cal Poly Tour"
+}

@@ -7,11 +7,11 @@
     "default_location_id": 1,
     "locations": {
       "porch": {
-        "location_id": 1,
-        "image": "porch.jpg",
+        "title": "Dexter Edge",
+        "description": "Dexter Edge",
+        "panorama": "porch.jpg",
         "overlays": [
           {
-            "overlay_id": 1,
             "title": "What is this?",
             "description": "Truck info overlay",
             "position": [9, 5, 3],

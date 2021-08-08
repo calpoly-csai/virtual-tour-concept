@@ -2,14 +2,12 @@
 import { Canvas } from "@react-three/fiber";
 import Panorama from "./Panorama";
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
-import JohnsYard from "../test/johns-yard.json";
+import { useEffect, createContext } from "react";
+import ArgoApi from "../modules/api";
 import { OrbitControls } from "@react-three/drei";
 // import Path from "./Path";
 import Loader from "./Loader";
-import Parser from "../modules/Parser";
-import { TourGraph } from "../types/TourGraph";
-import { Location } from "../types/Location";
+import { useTourGraph, useTourState } from "../hooks/useTourState";
 
 const tourStyle = css`
   width: 100%;
@@ -26,8 +24,20 @@ const instructionsCss = css`
 `;
 
 export default function Tour() {
-  // const [tourGraph, setTourGraph] = useState<TourGraph | null>(null);
-  const [location, setLocation] = useState<Location | null>(null);
+  const [tourGraph, setTourGraph] = useTourGraph();
+  const [tourState, updateTourState] = useTourState();
+  useEffect(() => {
+    ArgoApi.getTour("test")
+      .then((tour) => {
+        if (!tour) return;
+        setTourGraph(tour);
+        updateTourState((state) => {
+          state.location = tour.locations[tour.startingLocation];
+        });
+      })
+      .catch(console.error);
+  }, []);
+
   // const [locationHistory, setLocationHistory] = useState([]);
   // const isPath = !!location.video;
   const isPath = false;
@@ -39,7 +49,6 @@ export default function Tour() {
   //   let loc = moveForward
   //     ? TourGraphJSON[location.destination]
   //     : locationHistory[locationHistory.length - 1];
-  //   console.log("New Location", loc);
   //   setLocation(loc);
   // };
 
@@ -50,33 +59,14 @@ export default function Tour() {
   //   setLocation(location.paths[i]);
   // };
 
-  const getLocationFromId = (graph: TourGraph, id: number) => {
-    if (!graph) return null;
-    return graph.locations.find((loc) => loc.locationId === id) || null;
-  };
-
-  // Parse the JSON into a TourGraph object and load location on init
-  useEffect(() => {
-    let parser = new Parser();
-    let tourGraphs = parser.getGraph(JohnsYard);
-    if (tourGraphs && tourGraphs.length > 0) {
-      let graph = tourGraphs[0]; // Default to the first graph in the list
-      let defaultLocation = getLocationFromId(graph, graph.defaultLocationId);
-      // setTourGraph(graph);
-      setLocation(defaultLocation);
-    }
-  }, []);
-
   return (
     <div className="tour" css={tourStyle}>
-      {!location && <Loader />}
-      {location && (
+      {tourState.location ? (
         <Canvas style={{ display: isPath ? "none" : "block" }}>
           {!isPath && (
             <>
               <pointLight intensity={2} position={[7, 5, 1]} />
-              <Panorama location={location} />
-              {/* <Panorama location={location} onPathChosen={handlePathChoice} /> */}
+              <Panorama location={tourState.location} />
               <OrbitControls
                 position={[0, 0, 0]}
                 enableZoom={false}
@@ -88,8 +78,9 @@ export default function Tour() {
             </>
           )}
         </Canvas>
+      ) : (
+        <Loader />
       )}
-      {/* {isPath && <Path {...location} onPathEnd={handlePathEnd} tourGraph={tourGraph} />} */}
 
       <p css={instructionsCss}>{instructions}</p>
     </div>

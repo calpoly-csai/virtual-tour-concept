@@ -1,58 +1,27 @@
-import { useRef, useState, useEffect } from "react";
-import { TextureLoader, DoubleSide, Texture } from "three";
+import { useRef } from "react";
+import { DoubleSide, Texture } from "three";
 import Overlay from "./Overlay";
-import { Location } from "../types/Location";
-import { OverlayData } from "../types/OverlayData";
-
-let textureCache: Texture | null = null;
+import { useMemo } from "react";
+import ArgoAPI from "../modules/api";
 
 interface PanoramaProps {
-  location: Location;
+  location: Tour.Location;
 }
 
-export default function Panorama(props: PanoramaProps) {
-  let { location } = props;
-  let { image, overlays } = location;
-
+export default function Panorama({ location }: PanoramaProps) {
   // This reference will give us direct access to the mesh
   const mesh = useRef();
-  let [texture, setTexture] = useState(new Texture());
+  let texture = useMemo(() => ArgoAPI.getTexture(location.panorama), [
+    location,
+  ]);
 
-  function loadPanorama() {
-    if (textureCache) {
-      setTexture(textureCache);
-      return;
-    }
-    import(`../assets/${image}`).then((res) => {
-      const texture = new TextureLoader().load(res.default);
-      textureCache = texture;
-      setTexture(texture);
-    });
-  }
-
-  useEffect(loadPanorama, [image]);
-
-  // const [interaction, setInteraction] = useState("");
-
-  // const handleInteraction = (i) => {
-  //   setInteraction(i);
-  // };
-
-  let overlayComponents = overlays.map((overlay: OverlayData) => {
-    return (
-      <Overlay
-        {...overlay}
-        distanceFactor={12}
-        key={overlay.title}
-        onClick={() => {}}
-        // onClick={() => handleInteraction(overlay.information)}
-      />
-    );
+  let overlayComponents = location.overlays.map((overlay: Tour.Overlay) => {
+    return <Overlay {...overlay} key={overlay.title} />;
   });
 
   return (
     <group>
-      <mesh {...props} ref={mesh}>
+      <mesh ref={mesh}>
         <sphereBufferGeometry args={[10, 100, 212]} />
         <meshBasicMaterial map={texture} side={DoubleSide} />
       </mesh>
