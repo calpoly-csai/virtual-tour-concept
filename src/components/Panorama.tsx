@@ -4,8 +4,6 @@ import Overlay from "./Overlay";
 import { useMemo } from "react";
 import ArgoAPI from "../modules/api";
 
-let textureCache: Texture | null = null;
-
 interface PanoramaProps {
   location: Tour.Location;
 }

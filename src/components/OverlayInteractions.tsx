@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Link, ArrowRight, Info, Aperture } from "react-feather";
+import { LocationContext } from "./Tour";
+import { useContext } from "react";
+import { useTourState } from "../hooks/useTourState";
 
 const buttonCss = css`
   padding: 7px 15px;
@@ -46,17 +49,24 @@ function getActionIcon(interaction: Tour.OverlayAction) {
   }
 }
 
-// opens a new tab with the given link
-function linkOnClick(link: string) {
-  window.open(link, "_blank");
-}
-
 // returns the proper onClick method for each interaction
-function getClickAction(interaction: Tour.OverlayAction) {
-  if (interaction.type === "external-link") {
-    return () => linkOnClick(interaction.link);
-  } else {
-    return () => {};
+function getClickAction(
+  interaction: Tour.OverlayAction,
+  updateTourState: ReturnType<typeof useTourState>[1]
+) {
+  switch (interaction.type) {
+    case "external-link":
+      return () => window.open(interaction.link, "_blank");
+    case "path":
+      return () => {}; // TODO: Get paths working
+    case "portal":
+      return () => {
+        updateTourState((state, graph) => {
+          state.location = graph.locations[interaction.destination];
+        });
+      };
+    default:
+      return () => {};
   }
 }
 
@@ -65,10 +75,11 @@ interface OverlayInteractionsProps {
 }
 
 export default function OverlayInteractions(props: OverlayInteractionsProps) {
+  const updateTourState = useTourState()[1];
   let { interactions } = props;
   let buttons = interactions.map((interaction, key) => {
     const Icon = getActionIcon(interaction);
-    let onClick = getClickAction(interaction);
+    let onClick = getClickAction(interaction, updateTourState);
     return (
       <button css={buttonCss} key={key} onClick={onClick}>
         <Icon />

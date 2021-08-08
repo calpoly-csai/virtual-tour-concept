@@ -2,12 +2,18 @@
 import { Canvas } from "@react-three/fiber";
 import Panorama from "./Panorama";
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { useEffect, createContext } from "react";
 import ArgoApi from "../modules/api";
 import { OrbitControls } from "@react-three/drei";
-import ExampleTour from "../test/example-tour.json";
 // import Path from "./Path";
 import Loader from "./Loader";
+import { useTourGraph, useTourState } from "../hooks/useTourState";
+
+type LocationContextType = {
+  setLocation?: (id: string) => void;
+};
+
+export const LocationContext = createContext<LocationContextType>({});
 
 const tourStyle = css`
   width: 100%;
@@ -24,20 +30,19 @@ const instructionsCss = css`
 `;
 
 export default function Tour() {
-  const [tourGraph, setTourGraph] = useState<Tour.Graph>(ExampleTour);
-  const [location, setLocation] = useState<Tour.Location>(
-    tourGraph.locations[tourGraph.startingLocation]
-  );
-  console.log(tourGraph);
-  // useEffect(() => {
-  //   ArgoApi.getTour("test")
-  //     .then((tour) => {
-  //       if (!tour) return;
-  //       setTourGraph(tour);
-  //       setLocation(tour.locations[tour.startingLocation]);
-  //     })
-  //     .catch(console.error);
-  // }, []);
+  const [tourGraph, setTourGraph] = useTourGraph();
+  const [tourState, updateTourState] = useTourState();
+  useEffect(() => {
+    ArgoApi.getTour("test")
+      .then((tour) => {
+        if (!tour) return;
+        setTourGraph(tour);
+        updateTourState((state) => {
+          state.location = tour.locations[tour.startingLocation];
+        });
+      })
+      .catch(console.error);
+  }, []);
 
   // const [locationHistory, setLocationHistory] = useState([]);
   // const isPath = !!location.video;
@@ -63,12 +68,12 @@ export default function Tour() {
 
   return (
     <div className="tour" css={tourStyle}>
-      {location ? (
+      {tourState.location ? (
         <Canvas style={{ display: isPath ? "none" : "block" }}>
           {!isPath && (
             <>
               <pointLight intensity={2} position={[7, 5, 1]} />
-              <Panorama location={location} />
+              <Panorama location={tourState.location} />
               <OrbitControls
                 position={[0, 0, 0]}
                 enableZoom={false}
