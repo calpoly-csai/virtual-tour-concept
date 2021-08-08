@@ -9,12 +9,6 @@ import { OrbitControls } from "@react-three/drei";
 import Loader from "./Loader";
 import { useTourGraph, useTourState } from "../hooks/useTourState";
 
-type LocationContextType = {
-  setLocation?: (id: string) => void;
-};
-
-export const LocationContext = createContext<LocationContextType>({});
-
 const tourStyle = css`
   width: 100%;
   height: 100%;
@@ -55,7 +49,6 @@ export default function Tour() {
   //   let loc = moveForward
   //     ? TourGraphJSON[location.destination]
   //     : locationHistory[locationHistory.length - 1];
-  //   console.log("New Location", loc);
   //   setLocation(loc);
   // };
 

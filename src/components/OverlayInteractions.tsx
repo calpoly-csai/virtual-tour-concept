@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Link, ArrowRight, Info, Aperture } from "react-feather";
-import { LocationContext } from "./Tour";
-import { useContext } from "react";
 import { useTourState } from "../hooks/useTourState";
 
 const buttonCss = css`
